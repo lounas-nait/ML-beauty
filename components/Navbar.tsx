@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-  const isActiveLink = (path) => pathname === path;
+  const isActiveLink = (path: string): boolean => pathname === path;
 
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md h-20">
