@@ -104,7 +104,7 @@ export default function Services() {
                     href="https://calendly.com/lounas-nait960/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block w-full bg-gradient-pink text-white text-center py-2 rounded-lg font-bold hover:shadow-lg transition"
+                    className="block w-full gradient-pink text-white text-center py-2 rounded-lg font-bold hover:shadow-lg transition"
                   >
                     Réserver cette prestation
                   </a>
@@ -163,7 +163,7 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-pink">
+      <section className="py-16 gradient-pink">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Envie d'une beauté des ongles ?</h2>
           <a

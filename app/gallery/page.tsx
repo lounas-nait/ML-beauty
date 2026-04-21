@@ -92,7 +92,7 @@ export default function Gallery() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-rose-50 to-pink-50 py-20">
+      <section className="gradient-to-br from-rose-50 to-pink-50 py-20">
         <div className="container mx-auto px-4">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">Ma Galerie</h1>
           <p className="text-xl text-gray-600 max-w-2xl">
@@ -111,7 +111,7 @@ export default function Gallery() {
                 onClick={() => setActiveCategory(category)}
                 className={`px-6 py-2 rounded-full font-medium transition ${
                   activeCategory === category
-                    ? 'bg-gradient-pink text-white shadow-lg'
+                    ? 'gradient-pink text-white shadow-lg'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >

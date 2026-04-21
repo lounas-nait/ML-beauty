@@ -8,7 +8,10 @@ export const metadata: Metadata = {
   description: 'Service de pose de gel, semi-permanent et nail art haut de gamme à domicile. Paris et alentours.',
   keywords: ['nail art', 'ongles', 'gel', 'prothésiste', 'beauté', 'domicile', 'Paris'],
   authors: [{ name: 'MLbeauty' }],
-  viewport: 'width=device-width, initial-scale=1',
+  viewport: {
+  width: "device-width",
+  initialScale: 1,
+},
   robots: 'index, follow',
   openGraph: {
     type: 'website',

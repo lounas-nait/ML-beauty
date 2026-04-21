@@ -121,7 +121,7 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">WhatsApp</h3>
                     <a
-                      href="https://wa.me/33612345678"
+                      href="https://wa.me/33698028676"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-600 hover:text-green-700 font-semibold"
@@ -168,7 +168,7 @@ export default function Contact() {
                   href="https://calendly.com/lounas-nait960/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-gradient-pink text-white text-center py-3 rounded-lg font-bold hover:shadow-lg transition"
+                  className="block w-full gradient-pink text-white text-center py-3 rounded-lg font-bold hover:shadow-lg transition"
                 >
                   Accéder à Calendly
                 </a>
@@ -256,7 +256,7 @@ export default function Contact() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-pink text-white py-3 rounded-lg font-bold hover:shadow-lg transition transform hover:-translate-y-0.5"
+                  className="w-full gradient-pink text-white py-3 rounded-lg font-bold hover:shadow-lg transition transform hover:-translate-y-0.5"
                 >
                   Envoyer le Message
                 </button>
@@ -283,7 +283,7 @@ export default function Contact() {
           <div className="rounded-xl overflow-hidden shadow-lg h-96 bg-gray-200 flex items-center justify-center">
             <div className="text-center">
               <p className="text-2xl mb-2">🗺️</p>
-              <p className="text-gray-600">Paris et Île-de-France (rayon 15 km)</p>
+              <p className="text-gray-600">Chessy-Val d'europe</p>
               <p className="text-sm text-gray-500 mt-2">
                 Consultez vos décalages de déplacement sur Calendly
               </p>

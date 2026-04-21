@@ -15,4 +15,9 @@ module.exports = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+   
+  images: {
+    domains: ['images.unsplash.com'],
+  
+}
 }
