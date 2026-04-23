@@ -12,8 +12,8 @@ export default function Navbar() {
   const isActiveLink = (path: string): boolean => pathname === path;
 
   return (
-    <nav className="sticky top-0 z-50 bg-white shadow-md h-20">
-      <div className="container mx-auto px-4 h-full flex items-center justify-between">
+    <nav className="sticky top-0 z-50 bg-white shadow-md">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
@@ -97,21 +97,37 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden border-t px-4 py-4 flex flex-col gap-3 bg-white">
+        <div className="md:hidden border-t border-gray-200 px-4 py-4 flex flex-col gap-3 bg-white">
 
-          <Link href="/" className="text-gray-700 hover:text-rose-500 font-medium">
+          <Link 
+            href="/" 
+            onClick={() => setIsOpen(false)}
+            className="text-gray-700 hover:text-rose-500 font-medium py-2"
+          >
             Accueil
           </Link>
 
-          <Link href="/services" className="text-gray-700 hover:text-rose-500 font-medium">
+          <Link 
+            href="/services" 
+            onClick={() => setIsOpen(false)}
+            className="text-gray-700 hover:text-rose-500 font-medium py-2"
+          >
             Prestations
           </Link>
 
-          <Link href="/gallery" className="text-gray-700 hover:text-rose-500 font-medium">
+          <Link 
+            href="/gallery" 
+            onClick={() => setIsOpen(false)}
+            className="text-gray-700 hover:text-rose-500 font-medium py-2"
+          >
             Galerie
           </Link>
 
-          <Link href="/contact" className="text-gray-700 hover:text-rose-500 font-medium">
+          <Link 
+            href="/contact" 
+            onClick={() => setIsOpen(false)}
+            className="text-gray-700 hover:text-rose-500 font-medium py-2"
+          >
             Contact
           </Link>
 
@@ -119,7 +135,8 @@ export default function Navbar() {
             href="https://calendly.com/lounas-nait960/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium text-center"
+            onClick={() => setIsOpen(false)}
+            className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium text-center block mt-2"
           >
             Réserver
           </a>

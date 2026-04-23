@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { SERVICES } from '../lib/constants';
+import { reviews, getAverageRating } from '../lib/reviews';
+import ReviewCard from '../components/ReviewCard';
 
 const heroSlides = [
   {
@@ -47,26 +49,25 @@ export default function Home() {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
-  const testimonials = [
-    {
-      id: 1,
-      name: 'Sophie M.',
-      text: 'Service impeccable, très professionnelle ! Les ongles sont magnifiques et durent longtemps.',
-      rating: 5,
-    },
-    {
-      id: 2,
-      name: 'Clara B.',
-      text: 'J\'adore le confort de ne pas sortir de chez moi. Les prestations sont toujours de qualité.',
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: 'Léa D.',
-      text: 'Créative et à l\'écoute de mes envies. Je recommande vivement !',
-      rating: 5,
-    },
-  ];
+
+  const homeReviews = reviews.slice(0, 4);
+  const averageRating = getAverageRating();
+  const [reviewSlide, setReviewSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setReviewSlide((prev) => (prev + 1) % homeReviews.length);
+    }, 7000);
+    return () => clearInterval(timer);
+  }, [homeReviews.length]);
+
+  const prevReview = () => {
+    setReviewSlide((prev) => (prev - 1 + homeReviews.length) % homeReviews.length);
+  };
+
+  const nextReview = () => {
+    setReviewSlide((prev) => (prev + 1) % homeReviews.length);
+  };
 
   return (
     <>
@@ -164,6 +165,75 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Avis Clients */}
+      <section className="py-16 px-4 bg-gradient-to-br from-rose-50 via-white to-pink-50">
+        <div className="container mx-auto max-w-6xl">
+          
+
+          <div className="flex flex-col items-center gap-4 mb-10">
+            <div className="inline-flex items-center gap-4 rounded-full bg-white/90 px-6 py-3 shadow-sm border border-rose-100">
+              <span className="text-5xl font-bold text-rose-500">{averageRating}</span>
+              <span className="text-sm text-gray-500">/5</span>
+              <span className="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</span>
+              <span className="text-sm text-gray-500">({homeReviews.length} avis sélectionnés)</span>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="relative h-[420px] md:h-[360px]">
+              {homeReviews.map((review, index) => (
+                <div
+                  key={review.id}
+                  className={`absolute inset-0 transition-all duration-700 ease-out ${
+                    index === reviewSlide
+                      ? 'opacity-100 scale-100 translate-x-0'
+                      : index < reviewSlide
+                      ? 'opacity-0 scale-95 translate-x-full'
+                      : 'opacity-0 scale-95 -translate-x-full'
+                  }`}
+                >
+                  <ReviewCard review={review} className="min-h-[320px]" />
+                </div>
+              ))}
+            </div>
+
+            <button
+              onClick={prevReview}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
+            >
+              <span className="text-2xl group-hover:-translate-x-1 transition">‹</span>
+            </button>
+            <button
+              onClick={nextReview}
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
+            >
+              <span className="text-2xl group-hover:translate-x-1 transition">›</span>
+            </button>
+
+            <div className="flex justify-center gap-2 mt-8">
+              {homeReviews.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setReviewSlide(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === reviewSlide ? 'bg-rose-500 w-8' : 'bg-rose-200 w-2 hover:bg-rose-300'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/reviews"
+              className="inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition"
+            >
+              Voir tous les avis
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Services Preview */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
@@ -254,39 +324,10 @@ export default function Home() {
           <div className="text-center">
             <Link
               href="/gallery"
-              className="inline-flex items-center gap-2 bg-gradient-pink text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition"
+              className="inline-flex items-center gap-2 gradient-pink text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition"
             >
               Voir la galerie complète
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">Avis Clients</h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Ce que mes clientes pensent de mon travail
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <div
-                key={testimonial.id}
-                className="p-8 rounded-xl bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 hover-lift"
-              >
-                <div className="flex gap-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-400">
-                      ⭐
-                    </span>
-                  ))}
-                </div>
-                <p className="text-gray-700 mb-4 italic">"{testimonial.text}"</p>
-                <p className="font-bold text-gray-900">{testimonial.name}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -36,6 +36,9 @@ const config: Config = {
       fontFamily: {
         sans: ['system-ui', 'sans-serif'],
       },
+      transitionDuration: {
+        '700': '700ms',
+      },
     },
   },
   plugins: [],

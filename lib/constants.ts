@@ -24,6 +24,7 @@ export const NAVIGATION = [
   { name: 'Accueil', href: '/' },
   { name: 'Prestations', href: '/services' },
   { name: 'Galerie', href: '/gallery' },
+  { name: 'Avis', href: '/reviews' },
   { name: 'Contact', href: '/contact' },
 ];
 
