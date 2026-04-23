@@ -2,8 +2,51 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { SERVICES } from '../lib/constants';
+
+const heroSlides = [
+  {
+    id: 1,
+    image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&h=800&fit=crop',
+    service: SERVICES[0], // Pose Gel Premium
+  },
+  {
+    id: 2,
+    image: '/images/semiperm.jpeg',
+    service: SERVICES[1], // Semi-Permanent
+  },
+  {
+    id: 3,
+    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1200&h=800&fit=crop',
+    service: SERVICES[2], // Nail Art Personnalisé
+  },
+  {
+    id: 4,
+    image: 'https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=1200&h=800&fit=crop',
+    service: SERVICES[3], // Stylage Ongles Naturels
+  },
+];
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+  };
+
   const testimonials = [
     {
       id: 1,
@@ -27,68 +70,97 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-pink-50 flex items-center pt-10 pb-10">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
-            {/* Left: Text Content */}
-            <div className="animate-fade-in">
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                Sublimez vos <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500">ongles</span>
-              </h1>
-              <p className="text-lg text-gray-600 mb-4">
-                Service de prothésiste ongulaire haut de gamme <strong>à domicile</strong>. Confort, qualité et créativité.
-              </p>
-              <p className="text-lg text-gray-600 mb-8">
-                📍 <strong>Zone d'intervention :</strong> Chessy 77700 et alentours (15 km)
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://calendly.com/lounas-nait960/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center bg-gradient-pink text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"
-                >
-                  Réserver maintenant →
-                </a>
-                <Link
-                  href="/gallery"
-                  className="inline-flex items-center justify-center border-2 border-rose-500 text-rose-500 px-8 py-3 rounded-full font-bold text-lg hover:bg-rose-50 transition"
-                >
-                  Voir mes réalisations
-                </Link>
+      {/* Hero Carousel Section */}
+      <section className="relative h-[90vh] overflow-hidden">
+        {heroSlides.map((slide, index) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.service.title}
+              fill
+              priority={index === 0}
+              className="object-cover"
+            />
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/40"></div>
+            {/* Content Overlay */}
+            <div className="absolute inset-0 flex items-center">
+              <div className="container mx-auto px-4">
+                <div className="max-w-2xl text-white">
+                  <div className="mb-4">
+                    <span className="text-2xl">{slide.service.icon}</span>
+                  </div>
+                  <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+                    {slide.service.title}
+                  </h1>
+                  <p className="text-xl mb-6 opacity-90">
+                    {slide.service.description}
+                  </p>
+                  <div className="mb-6">
+                    <ul className="space-y-2">
+                      {slide.service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center">
+                          <span className="text-rose-400 mr-2">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="text-3xl font-bold text-rose-400 mb-8">
+                    {slide.service.price}
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                      href="https://calendly.com/lounas-nait960/30min"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"
+                    >
+                      Réserver maintenant →
+                    </a>
+                    <Link
+                      href="/services"
+                      className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition"
+                    >
+                      Voir toutes les prestations
+                    </Link>
+                  </div>
+                </div>
               </div>
-
-              {/* Stats */}
-              <div className="flex gap-8 mt-12">
-                <div>
-                  <div className="text-3xl font-bold text-rose-500">500+</div>
-                  <div className="text-sm text-gray-600">Clientes satisfaites</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-rose-500">5/5</div>
-                  <div className="text-sm text-gray-600">Avis clients</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-rose-500">4 ans</div>
-                  <div className="text-sm text-gray-600">D'expérience</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Hero Image */}
-            <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden shadow-xl hover-lift group">
-              <Image
-                src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&h=1000&fit=crop"
-                alt="Nail Art Professionnel"
-                fill
-                priority
-                className="object-cover group-hover:scale-105 transition duration-300"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
           </div>
+        ))}
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition"
+        >
+          ‹
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition"
+        >
+          ›
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {heroSlides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition ${
+                index === currentSlide ? 'bg-white' : 'bg-white/50'
+              }`}
+            />
+          ))}
         </div>
       </section>
 
@@ -154,14 +226,23 @@ export default function Home() {
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+            {[
+              heroSlides[0].image,
+              heroSlides[1].image,
+              heroSlides[2].image,
+              heroSlides[3].image,
+              heroSlides[0].image,
+              heroSlides[1].image,
+              heroSlides[2].image,
+              heroSlides[3].image,
+            ].map((imageSrc, item) => (
               <div
                 key={item}
                 className="relative h-48 rounded-xl overflow-hidden shadow-md hover-lift group bg-gray-200"
               >
                 <Image
-                  src={`https://images.unsplash.com/photo-160465489${Math.floor(Math.random() * 10)}11-df63bc536371?w=300&h=300&fit=crop`}
-                  alt={`Réalisation ${item}`}
+                  src={imageSrc}
+                  alt={`Réalisation ${item + 1}`}
                   fill
                   className="object-cover group-hover:scale-110 transition duration-300"
                 />
