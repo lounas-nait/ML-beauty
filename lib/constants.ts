@@ -54,7 +54,7 @@ export const SERVICES = [
       'Sans lime à ongles',
       'Finition brillante impeccable',
     ],
-    price: 'À partir de 35€',
+    price: '20€',
   },
   {
     id: 3,
@@ -91,6 +91,20 @@ export const SERVICES = [
     description: 'Soin complet des mains et des ongles',
     features: ['Gommage des mains', 'Hydratation intensive', 'Pose gel ou semi-permanent'],
     price: 'À partir de 55€',
+  },
+  {
+    id: 7,
+    icon: '✨',
+    title: 'Dépose Semi-Permanent',
+    slug: 'depose-semi-permanent',
+    description:
+      'Retrait professionnel du vernis semi-permanent en douceur, sans abîmer l’ongle naturel.',
+    features: [
+      'Retrait sécurisé',
+      'Protection de l’ongle naturel',
+      'Finition propre et nette',
+    ],
+    price: 'À partir de 5€',
   },
 ];
 

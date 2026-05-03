@@ -10,24 +10,15 @@ import ReviewCard from '../components/ReviewCard';
 const heroSlides = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=1200&h=800&fit=crop',
-    service: SERVICES[0], // Pose Gel Premium
+    image: '/images/realisattions/P11.jpg',
+    service: SERVICES[1], // semi-permanent
   },
   {
     id: 2,
-    image: '/images/semiperm.jpeg',
-    service: SERVICES[1], // Semi-Permanent
+    image: '/images/realisattions/P222.jpg',
+    service: SERVICES[6], // Semi-Permanent
   },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1200&h=800&fit=crop',
-    service: SERVICES[2], // Nail Art Personnalisé
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1607779097040-26e80aa78e66?w=1200&h=800&fit=crop',
-    service: SERVICES[3], // Stylage Ongles Naturels
-  },
+  
 ];
 
 export default function Home() {
@@ -166,77 +157,90 @@ export default function Home() {
       </section>
 
       {/* Avis Clients */}
-      <section className="py-16 px-4 bg-gradient-to-br from-rose-50 via-white to-pink-50">
-        <div className="container mx-auto max-w-6xl">
-          
+<section className="py-16 px-4 bg-gradient-to-br from-rose-50 via-white to-pink-50 overflow-x-hidden">
+  <div className="container mx-auto max-w-6xl">
 
-          <div className="flex flex-col items-center gap-4 mb-10">
-            <div className="inline-flex items-center gap-4 rounded-full bg-white/90 px-6 py-3 shadow-sm border border-rose-100">
-              <span className="text-5xl font-bold text-rose-500">{averageRating}</span>
-              <span className="text-sm text-gray-500">/5</span>
-              <span className="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</span>
-              <span className="text-sm text-gray-500">({homeReviews.length} avis sélectionnés)</span>
-            </div>
+    {/* Rating */}
+    <div className="flex flex-col items-center gap-4 mb-10">
+      <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-full bg-white/90 px-4 sm:px-6 py-3 shadow-sm border border-rose-100 text-center">
+        <span className="text-3xl sm:text-5xl font-bold text-rose-500">
+          {averageRating}
+        </span>
+        <span className="text-sm text-gray-500">/5</span>
+        <span className="text-yellow-400 text-xl sm:text-2xl">⭐⭐⭐⭐⭐</span>
+        <span className="text-xs sm:text-sm text-gray-500">
+          ({homeReviews.length} avis sélectionnés)
+        </span>
+      </div>
+    </div>
+
+    {/* Slider */}
+    <div className="relative">
+
+      <div className="relative h-[360px] sm:h-[420px] overflow-hidden">
+
+        {homeReviews.map((review, index) => (
+          <div
+            key={review.id}
+            className={`absolute inset-0 transition-all duration-700 ease-out ${
+              index === reviewSlide
+                ? 'opacity-100 translate-x-0 scale-100'
+                : 'opacity-0 scale-95'
+            }`}
+          >
+            <ReviewCard review={review} className="min-h-[300px]" />
           </div>
+        ))}
 
-          <div className="relative">
-            <div className="relative h-[420px] md:h-[360px]">
-              {homeReviews.map((review, index) => (
-                <div
-                  key={review.id}
-                  className={`absolute inset-0 transition-all duration-700 ease-out ${
-                    index === reviewSlide
-                      ? 'opacity-100 scale-100 translate-x-0'
-                      : index < reviewSlide
-                      ? 'opacity-0 scale-95 translate-x-full'
-                      : 'opacity-0 scale-95 -translate-x-full'
-                  }`}
-                >
-                  <ReviewCard review={review} className="min-h-[320px]" />
-                </div>
-              ))}
-            </div>
+      </div>
 
-            <button
-              onClick={prevReview}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
-            >
-              <span className="text-2xl group-hover:-translate-x-1 transition">‹</span>
-            </button>
-            <button
-              onClick={nextReview}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
-            >
-              <span className="text-2xl group-hover:translate-x-1 transition">›</span>
-            </button>
+      {/* Buttons NAV - FIX MOBILE SAFE */}
+      <button
+        onClick={prevReview}
+        className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-rose-100 text-rose-500 p-2 sm:p-3 rounded-full shadow-md transition"
+      >
+        <span className="text-xl sm:text-2xl">‹</span>
+      </button>
 
-            <div className="flex justify-center gap-2 mt-8">
-              {homeReviews.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setReviewSlide(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === reviewSlide ? 'bg-rose-500 w-8' : 'bg-rose-200 w-2 hover:bg-rose-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+      <button
+        onClick={nextReview}
+        className="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-rose-100 text-rose-500 p-2 sm:p-3 rounded-full shadow-md transition"
+      >
+        <span className="text-xl sm:text-2xl">›</span>
+      </button>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/reviews"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 text-white px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition"
-            >
-              Voir tous les avis
-            </Link>
-          </div>
-        </div>
-      </section>
+    </div>
+
+    {/* Indicators */}
+    <div className="flex justify-center gap-2 mt-8 flex-wrap">
+      {homeReviews.map((_, index) => (
+        <button
+          key={index}
+          onClick={() => setReviewSlide(index)}
+          className={`h-2 rounded-full transition-all duration-300 ${
+            index === reviewSlide ? 'bg-rose-500 w-6 sm:w-8' : 'bg-rose-200 w-2'
+          }`}
+        />
+      ))}
+    </div>
+
+    {/* CTA */}
+    <div className="text-center mt-12">
+      <Link
+        href="/reviews"
+        className="inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-lg hover:shadow-2xl transition"
+      >
+        Voir tous les avis
+      </Link>
+    </div>
+
+  </div>
+</section>
 
       {/* Services Preview */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">Mes Prestations</h2>
           <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
             Découvrez mes services haut de gamme adaptés à tous vos envies
@@ -245,15 +249,17 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: '✨',
-                title: 'Pose Gel',
-                description: 'Ongles longs et résistants avec finition brillante',
-              },
-              {
                 icon: '💅',
                 title: 'Semi-Permanent',
                 description: 'Vernis semi-permanent 2-3 semaines',
               },
+              {
+                icon: '✨',
+                title: 'Dépose Semi-Permanent',
+                description: 'Retrait du vernis semi-permanent en douceur',
+              },
+              
+              /*
               {
                 icon: '🎨',
                 title: 'Nail Art',
@@ -264,6 +270,7 @@ export default function Home() {
                 title: 'Stylage Ongles',
                 description: 'Mise en forme et traitement des ongles naturels',
               },
+              */
             ].map((service) => (
               <div
                 key={service.title}
@@ -285,52 +292,117 @@ export default function Home() {
             </Link>
           </div>
         </div>
+        </div>
       </section>
 
-      {/* Gallery Preview */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">Dernières Réalisations</h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Explorez mes créations et trouvez l'inspiration pour vos prochains ongles
-          </p>
+     {/* RÉALISATIONS */}
+<section className="py-20 bg-white">
+  <div className="container mx-auto px-4">
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-            {[
-              heroSlides[0].image,
-              heroSlides[1].image,
-              heroSlides[2].image,
-              heroSlides[3].image,
-              heroSlides[0].image,
-              heroSlides[1].image,
-              heroSlides[2].image,
-              heroSlides[3].image,
-            ].map((imageSrc, item) => (
+    <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
+      Dernières Réalisations
+    </h2>
+
+    <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+      Découvrez mes créations récentes en semi-permanent.
+    </p>
+
+    {/* DATA */}
+    {(() => {
+      const realisations = [
+        {
+          id: 1,
+          title: "Semi-permanent nude",
+          images: [
+            '/images/realisattions/P11.jpg',
+            '/images/realisattions/P1.jpg',
+            '/images/realisattions/P111.jpg',
+          ],
+        },
+        {
+          id: 2,
+          title: "Semi-permanent rouge",
+          images: [
+            '/images/realisattions/P2.jpg',
+            '/images/realisattions/P22.jpg',
+            '/images/realisattions/P222.jpg',
+          ],
+        },
+      ];
+
+      // ⚠️ hook ici OK (dans composant, pas dans map)
+      const [selectedRealisation, setSelectedRealisation] = useState<any>(null);
+
+      return (
+        <>
+          {/* GRID */}
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {realisations.map((real) => (
               <div
-                key={item}
-                className="relative h-48 rounded-xl overflow-hidden shadow-md hover-lift group bg-gray-200"
+                key={real.id}
+                onClick={() => setSelectedRealisation(real)}
+                className="relative aspect-square rounded-2xl overflow-hidden shadow-md cursor-pointer group"
               >
                 <Image
-                  src={imageSrc}
-                  alt={`Réalisation ${item + 1}`}
+                  src={real.images[0]}
+                  alt={real.title}
                   fill
                   className="object-cover group-hover:scale-110 transition duration-300"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition"></div>
+                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                  <span className="text-white font-bold text-sm sm:text-lg">
+                    Voir
+                  </span>
+                </div>
               </div>
             ))}
           </div>
 
-          <div className="text-center">
-            <Link
-              href="/gallery"
-              className="inline-flex items-center gap-2 gradient-pink text-white px-8 py-3 rounded-full font-bold hover:shadow-lg transition"
-            >
-              Voir la galerie complète
-            </Link>
-          </div>
-        </div>
-      </section>
+          {/* MODAL RESPONSIVE */}
+          {selectedRealisation && (
+            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-3 sm:p-6">
+              
+              <div className="relative bg-white rounded-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
+
+                {/* CLOSE */}
+                <button
+                  onClick={() => setSelectedRealisation(null)}
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-600 text-2xl"
+                >
+                  ✕
+                </button>
+
+                {/* TITLE */}
+                <h3 className="text-xl sm:text-2xl font-bold mb-6 text-center">
+                  {selectedRealisation.title}
+                </h3>
+
+                {/* IMAGES GRID */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  {selectedRealisation.images.map((img: string, index: number) => (
+                    <div
+                      key={index}
+                      className="relative w-full aspect-square sm:aspect-[4/5] rounded-xl overflow-hidden"
+                    >
+                      <Image
+                        src={img}
+                        alt={`Image ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+              </div>
+            </div>
+          )}
+        </>
+      );
+    })()}
+
+  </div>
+</section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-rose-500 to-pink-500">
