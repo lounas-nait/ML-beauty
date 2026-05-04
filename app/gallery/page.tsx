@@ -2,92 +2,20 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import {realisations}  from '../../lib/realisations';
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
 
-  const galleryItems = [
-    {
-      id: 1,
-      alt: 'Gel classique brillant',
-      category: 'Gel',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 2,
-      alt: 'Nail art géométrique',
-      category: 'Nail Art',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop&crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bmFpbHN8fHx8fHwxNjI3NzQ5MjAw&ixlib=rb-1.2.1&q=80',
-    },
-    {
-      id: 3,
-      alt: 'Semi-permanent rose pastel',
-      category: 'Semi-Permanent',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 4,
-      alt: 'French manucure moderne',
-      category: 'French',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 5,
-      alt: 'Nail art 3D paillettes',
-      category: 'Nail Art',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 6,
-      alt: 'Ombre nails dégradé',
-      category: 'Ombre',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 7,
-      alt: 'Nail art floral',
-      category: 'Nail Art',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 8,
-      alt: 'Gold glamour',
-      category: 'Luxe',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 9,
-      alt: 'Nude élégant',
-      category: 'Classique',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 10,
-      alt: 'Gel effet marbre',
-      category: 'Gel',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 11,
-      alt: 'Nail art géométrique doré',
-      category: 'Nail Art',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-    {
-      id: 12,
-      alt: 'Rose poudré mat',
-      category: 'Semi-Permanent',
-      src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=500&h=500&fit=crop',
-    },
-  ];
+  
 
-  const categories = ['Toutes', ...new Set(galleryItems.map((item) => item.category))];
+  const categories = ['Toutes', ...new Set(realisations.map((item) => item.category))];
   const [activeCategory, setActiveCategory] = useState('Toutes');
 
   const filteredItems =
     activeCategory === 'Toutes'
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === activeCategory);
+      ? realisations
+      : realisations.filter((item) => item.category === activeCategory);
 
   return (
     <>
@@ -133,14 +61,14 @@ export default function Gallery() {
                 onClick={() => setSelectedImage(item.id)}
               >
                 <Image
-                  src={item.src}
-                  alt={item.alt}
+                  src={item.images[0]} // Affiche la première image de chaque réalisation
+                  alt={item.title}
                   fill
                   className="object-cover group-hover:scale-110 transition duration-300"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                  <p className="text-white font-semibold text-sm">{item.alt}</p>
+                  <p className="text-white font-semibold text-sm">{item.title}</p>
                 </div>
               </div>
             ))}
@@ -175,14 +103,14 @@ export default function Gallery() {
             </button>
             <div className="relative h-96 md:h-[600px] rounded-lg overflow-hidden">
               <Image
-                src={galleryItems.find((item) => item.id === selectedImage)?.src || ''}
+                src={realisations.find((item) => item.id === selectedImage)?.images[0] || ''}
                 alt="Galerie zoom"
                 fill
                 className="object-cover"
               />
             </div>
             <p className="text-white text-center mt-4 text-sm">
-              {galleryItems.find((item) => item.id === selectedImage)?.alt}
+              {realisations.find((item) => item.id === selectedImage)?.title}
             </p>
           </div>
         </div>

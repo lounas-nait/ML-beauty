@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { SERVICES } from '../lib/constants';
 import { reviews, getAverageRating } from '../lib/reviews';
 import ReviewCard from '../components/ReviewCard';
+import {realisations}  from '../lib/realisations';
 
 const heroSlides = [
   {
@@ -27,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 10000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
   }, []);
@@ -238,62 +239,77 @@ export default function Home() {
 </section>
 
       {/* Services Preview */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">Mes Prestations</h2>
-          <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-            Découvrez mes services haut de gamme adaptés à tous vos envies
+<section className="py-16 md:py-20 bg-white">
+  <div className="container mx-auto px-4">
+
+    {/* TITRE */}
+    <div className="text-center mb-12">
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Mes Prestations
+      </h2>
+      <p className="text-gray-600 max-w-2xl mx-auto text-sm md:text-base">
+        Découvrez mes services haut de gamme adaptés à vos envies.
+      </p>
+    </div>
+
+    {/* GRID SERVICES */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 md:gap-8">
+
+      {[
+        {
+          icon: '💅',
+          title: 'Semi-Permanent',
+          description: 'Vernis semi-permanent 2-3 semaines',
+        },
+        {
+          icon: '✨',
+          title: 'Dépose Semi-Permanent',
+          description: 'Retrait du vernis semi-permanent en douceur',
+        },
+
+        /*
+        {
+          icon: '🎨',
+          title: 'Nail Art',
+          description: 'Designs personnalisés et créatifs',
+        },
+        {
+          icon: '👑',
+          title: 'Stylage Ongles',
+          description: 'Mise en forme et traitement des ongles naturels',
+        },
+        */
+      ].map((service) => (
+        <div
+          key={service.title}
+          className="p-8 rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 hover:shadow-xl transition text-center"
+        >
+          <div className="text-5xl mb-5">{service.icon}</div>
+
+          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+            {service.title}
+          </h3>
+
+          <p className="text-gray-600 text-sm md:text-base">
+            {service.description}
           </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: '💅',
-                title: 'Semi-Permanent',
-                description: 'Vernis semi-permanent 2-3 semaines',
-              },
-              {
-                icon: '✨',
-                title: 'Dépose Semi-Permanent',
-                description: 'Retrait du vernis semi-permanent en douceur',
-              },
-              
-              /*
-              {
-                icon: '🎨',
-                title: 'Nail Art',
-                description: 'Designs personnalisés et créatifs',
-              },
-              {
-                icon: '👑',
-                title: 'Stylage Ongles',
-                description: 'Mise en forme et traitement des ongles naturels',
-              },
-              */
-            ].map((service) => (
-              <div
-                key={service.title}
-                className="p-6 rounded-xl bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 hover-lift text-center"
-              >
-                <div className="text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                <p className="text-gray-600 text-sm">{service.description}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-rose-500 font-bold hover:gap-3 transition"
-            >
-              Voir tous les services →
-            </Link>
-          </div>
         </div>
-        </div>
-      </section>
+      ))}
+
+    </div>
+
+    {/* CTA */}
+    <div className="text-center mt-12">
+      <Link
+        href="/services"
+        className="inline-flex items-center gap-2 text-rose-500 font-bold hover:gap-3 transition text-sm md:text-base"
+      >
+        Voir tous les services →
+      </Link>
+    </div>
+
+  </div>
+</section>
 
      {/* RÉALISATIONS */}
 <section className="py-20 bg-white">
@@ -304,31 +320,12 @@ export default function Home() {
     </h2>
 
     <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-      Découvrez mes créations récentes en semi-permanent.
+      Découvrez mes créations récentes.
     </p>
 
     {/* DATA */}
     {(() => {
-      const realisations = [
-        {
-          id: 1,
-          title: "Semi-permanent nude",
-          images: [
-            '/images/realisattions/P11.jpg',
-            '/images/realisattions/P1.jpg',
-            '/images/realisattions/P111.jpg',
-          ],
-        },
-        {
-          id: 2,
-          title: "Semi-permanent rouge",
-          images: [
-            '/images/realisattions/P2.jpg',
-            '/images/realisattions/P22.jpg',
-            '/images/realisattions/P222.jpg',
-          ],
-        },
-      ];
+      
 
       // ⚠️ hook ici OK (dans composant, pas dans map)
       const [selectedRealisation, setSelectedRealisation] = useState<any>(null);

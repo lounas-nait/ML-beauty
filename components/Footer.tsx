@@ -16,7 +16,7 @@ export default function Footer() {
               <span className="font-bold text-lg">MLbeauty</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Prothésiste ongulaire à domicile - Service haut de gamme à Paris et alentours
+              Prothésiste ongulaire à domicile - Service haut de gamme à Chessy et alentours
             </p>
           </div>
 
@@ -52,16 +52,10 @@ export default function Footer() {
             <h3 className="font-bold mb-4">Services</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <span className="text-gray-400">Pose Gel</span>
-              </li>
-              <li>
                 <span className="text-gray-400">Semi-Permanent</span>
               </li>
               <li>
-                <span className="text-gray-400">Nail Art</span>
-              </li>
-              <li>
-                <span className="text-gray-400">Stylage Ongles</span>
+                <span className="text-gray-400">Dépose Semi-Permanent</span>
               </li>
             </ul>
           </div>
@@ -71,22 +65,22 @@ export default function Footer() {
             <h3 className="font-bold mb-4">Suivez-moi</h3>
             <div className="flex gap-4 mb-4">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-gradient-pink rounded-full flex items-center justify-center hover:shadow-lg transition text-white"
+                className="w-12 h-12 bg-500 rounded-full flex items-center justify-center hover:shadow-lg transition text-white"
                 aria-label="Instagram"
               >
-                📷
+                <img src="/logos/instagram.webp" alt="Instagram" />
               </a>
               <a
-                href="https://wa.me/33612345678"
+                href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:shadow-lg transition text-white"
-                aria-label="WhatsApp"
+                className="w-12 h-12 bg-500 rounded-full flex items-center justify-center hover:shadow-lg transition text-white"
+                aria-label="TikTok"
               >
-                💬
+                <img src="/logos/tiktok.webp" alt="TikTok" />
               </a>
             </div>
             <a
@@ -107,7 +101,7 @@ export default function Footer() {
             <div className="flex gap-4 mt-4 md:mt-0">
               <span>Service à domicile</span>
               <span>•</span>
-              <span>Paris et alentours</span>
+              <span>Chessy et alentours</span>
             </div>
           </div>
         </div>

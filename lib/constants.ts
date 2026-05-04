@@ -51,7 +51,6 @@ export const SERVICES = [
     description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
     features: [
       'Durée : 2-3 semaines',
-      'Sans lime à ongles',
       'Finition brillante impeccable',
     ],
     price: '20€',

@@ -4,8 +4,30 @@
 
 export default function Services() {
   const services = [
+
     {
       id: 1,
+      icon: '💅',
+      title: 'Semi-Permanent',
+      description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
+      features: ['Durée : 2-3 semaines', 'Sans lime à ongles', 'Finition brillante impeccable'],
+      price: '20€',
+    },
+    {
+      id: 2,
+      icon: '✨',
+      title: 'Dépose Semi-Permanent',
+      description: 'Retrait professionnel du vernis semi-permanent en douceur, sans abîmer l’ongle naturel',
+      features: [
+        'Méthode sécurisée et contrôlée',
+        'Respect total de l’ongle naturel',
+        'Nettoyage et finition soignée'
+      ],
+      price: 'À partir de 5€',
+    },
+    /*
+    {
+      id: 3,
       icon: '✨',
       title: 'Pose Gel Premium',
       description: 'Ongles gel ultra-longs et résistants avec finition brillante',
@@ -13,15 +35,7 @@ export default function Services() {
       price: 'À partir de 45€',
     },
     {
-      id: 2,
-      icon: '💅',
-      title: 'Semi-Permanent',
-      description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
-      features: ['Durée : 2-3 semaines', 'Sans lime à ongles', 'Finition brillante impeccable'],
-      price: 'À partir de 35€',
-    },
-    {
-      id: 3,
+      id: 4,
       icon: '🎨',
       title: 'Nail Art Personnalisé',
       description: 'Designs créatifs et originaux adaptés à vos envies',
@@ -29,7 +43,7 @@ export default function Services() {
       price: 'À partir de 50€',
     },
     {
-      id: 4,
+      id: 5,
       icon: '👑',
       title: 'Stylage Ongles Naturels',
       description: 'Mise en forme et traitement des ongles naturels',
@@ -37,7 +51,7 @@ export default function Services() {
       price: 'À partir de 25€',
     },
     {
-      id: 5,
+      id: 6,
       icon: '💍',
       title: 'Nail Art Complexe',
       description: 'Créations artisanales avec détails et techniques avancées',
@@ -45,13 +59,14 @@ export default function Services() {
       price: 'À partir de 60€',
     },
     {
-      id: 6,
+      id: 7,
       icon: '🌸',
       title: 'Manucure Complète',
       description: 'Soin complet des mains et des ongles',
       features: ['Gommage des mains', 'Hydratation intensive', 'Pose gel ou semi-permanent'],
       price: 'À partir de 55€',
     },
+    */
   ];
 
   return (
@@ -124,28 +139,26 @@ export default function Services() {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">🏠 Service à Domicile</h3>
                 <p className="text-gray-600 mb-4">
-                  Je me déplace directement à votre domicile pour votre confort. Plus besoin de vous faire la route !
+                  Je me déplace aussi à votre domicile pour votre confort. Plus besoin de vous faire la route !
                 </p>
                 <p className="text-gray-600">
-                  <strong>Zone d'intervention :</strong> Paris (75) et alentours (jusqu'à 15 km)
+                  <strong>Zone d'intervention :</strong> Chessy et alentours (jusqu'à 15 km)
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">⏱️ Durée des Prestations</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• Pose Gel : 1h à 1h30</li>
+                  
                   <li>• Semi-Permanent : 45 min à 1h</li>
-                  <li>• Nail Art : 1h à 2h selon la complexité</li>
-                  <li>• Remplissage gel : 45 min</li>
+                  
+                  <li>• Dépose Semi-Permanent : 30 min</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">💳 Modes de Paiement</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• Espèces</li>
-                  <li>• Carte bancaire</li>
+                  <li>• Espèces</li>       
                   <li>• Virement bancaire</li>
-                  <li>• PayPal</li>
                 </ul>
               </div>
               <div>

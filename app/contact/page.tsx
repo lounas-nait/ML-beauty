@@ -69,12 +69,14 @@ export default function Contact() {
                       +33 6 98 02 86 76
                     </a>
                     <p className="text-gray-600 text-sm mt-1">
-                      Disponible du lundi au samedi
+                      Disponible 7j/7 de 9h à 20h
                     </p>
                   </div>
                 </div>
 
+
                 {/* Email */}
+                {/*
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-pink text-white text-xl">
@@ -94,6 +96,7 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
+                */}
 
                 {/* Location */}
                 <div className="flex gap-4">
@@ -111,48 +114,48 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* WhatsApp */}
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white text-xl">
-                      💬
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-bold text-gray-900 mb-2">WhatsApp</h3>
-                    <a
-                      href="https://wa.me/33698028676"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-green-600 hover:text-green-700 font-semibold"
-                    >
-                      Nous écrire sur WhatsApp
-                    </a>
-                    <p className="text-gray-600 text-sm mt-1">
-                      Disponible pour vos questions
-                    </p>
-                  </div>
-                </div>
-
                 {/* Instagram */}
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
-                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-rose-500 to-pink-500 text-white text-xl">
-                      📷
+                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-to-r from-500 to-pink-500 text-white text-xl">
+                      <img src="/logos/instagram.webp" alt="Instagram" />
                     </div>
                   </div>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Instagram</h3>
                     <a
-                      href="https://instagram.com"
+                      href="https://instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-rose-500 hover:text-rose-600 font-semibold"
                     >
-                      @ml_beauty_chessy
+                      @mlbeauty_77
                     </a>
                     <p className="text-gray-600 text-sm mt-1">
                       Suivez mes dernières créations
+                    </p>
+                  </div>
+                </div>
+
+                {/* TikTok */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center justify-center h-12 w-12 rounded-md bg-500 text-white text-xl">
+                      <img src="/logos/tiktok.webp" alt="TikTok" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">TikTok</h3>
+                    <a
+                      href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-green-600 hover:text-green-700 font-semibold"
+                    >
+                      Nous écrire sur TikTok
+                    </a>
+                    <p className="text-gray-600 text-sm mt-1">
+                      Disponible pour vos questions
                     </p>
                   </div>
                 </div>
