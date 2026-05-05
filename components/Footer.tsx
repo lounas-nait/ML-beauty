@@ -16,7 +16,7 @@ export default function Footer() {
               <span className="font-bold text-lg">MLbeauty</span>
             </div>
             <p className="text-gray-400 text-sm">
-              Prothésiste ongulaire à domicile - Service haut de gamme à Chessy et alentours
+              Prothésiste ongulaire - Service haut de gamme à Chessy et alentours
             </p>
           </div>
 
@@ -84,7 +84,7 @@ export default function Footer() {
               </a>
             </div>
             <a
-              href="https://calendly.com/lounas-nait960/30min"
+              href="https://calendly.com/lounas-nait960/semi-permanent-1h"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-pink text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition"

@@ -53,7 +53,10 @@ export default function Contact() {
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Mes Coordonnées</h2>
 
               <div className="space-y-8">
+
+
                 {/* Phone */}
+                {/*
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-pink text-white text-xl">
@@ -73,10 +76,10 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
-
+                */}
 
                 {/* Email */}
-                {/*
+                
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-pink text-white text-xl">
@@ -86,17 +89,17 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Email</h3>
                     <a
-                      href="mailto:contact@mlbeauty.com"
+                      href="mailto:mlbeauty.contactpro@gmail.com"
                       className="text-rose-500 hover:text-rose-600 font-semibold"
                     >
-                      contact@nailsbeauty.com
+                      mlbeauty.contactpro@gmail.com
                     </a>
                     <p className="text-gray-600 text-sm mt-1">
                       Réponse sous 24h
                     </p>
                   </div>
                 </div>
-                */}
+                
 
                 {/* Location */}
                 <div className="flex gap-4">
@@ -132,7 +135,7 @@ export default function Contact() {
                       @mlbeauty_77
                     </a>
                     <p className="text-gray-600 text-sm mt-1">
-                      Suivez mes dernières créations
+                      Nous écrire sur Instagram
                     </p>
                   </div>
                 </div>
@@ -150,9 +153,9 @@ export default function Contact() {
                       href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-600 hover:text-green-700 font-semibold"
+                      className="text-600 hover:text-700 font-semibold"
                     >
-                      Nous écrire sur TikTok
+                      Suivez mes dernières créations
                     </a>
                     <p className="text-gray-600 text-sm mt-1">
                       Disponible pour vos questions
@@ -168,7 +171,7 @@ export default function Contact() {
                   Consultez mes disponibilités directement sur Calendly et choisissez le créneau qui vous convient
                 </p>
                 <a
-                  href="https://calendly.com/lounas-nait960/30min"
+                  href="https://calendly.com/lounas-nait960/semi-permanent-1h"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full gradient-pink text-white text-center py-3 rounded-lg font-bold hover:shadow-lg transition"

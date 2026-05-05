@@ -73,7 +73,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="https://calendly.com/lounas-nait960/30min"
+            href="https://calendly.com/lounas-nait960/semi-permanent-1h"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition"
@@ -132,7 +132,7 @@ export default function Navbar() {
           </Link>
 
           <a
-            href="https://calendly.com/lounas-nait960/30min"
+            href="https://calendly.com/lounas-nait960/semi-permanent-1h"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}

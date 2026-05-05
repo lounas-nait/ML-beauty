@@ -10,7 +10,7 @@ export const WHATSAPP_LINK = 'https://wa.me/33612345678';
 export const INSTAGRAM_LINK = 'https://instagram.com/nails_beauty_paris';
 
 // Booking
-export const CALENDLY_LINK = 'https://calendly.com/lounas-nait960/30min';
+export const CALENDLY_LINK = 'https://calendly.com/lounas-nait960/semi-permanent-1h';
 
 // Service Area
 export const SERVICE_AREA = 'Paris et alentours (15 km)';
