@@ -126,7 +126,7 @@ export default function Gallery() {
             Réservez votre rendez-vous et créons ensemble votre look idéal
           </p>
           <a
-            href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+            href="https://calendly.com/mlbeauty77/semi-permanent-1h"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-10 py-4 rounded-full font-bold hover:shadow-lg transition"

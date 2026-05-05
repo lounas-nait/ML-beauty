@@ -116,7 +116,7 @@ export default function Services() {
                 {/* Card Footer */}
                 <div className="p-8 bg-gradient-to-r from-rose-50 to-pink-50 border-t border-rose-100">
                   <a
-                    href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+                    href="https://calendly.com/mlbeauty77/semi-permanent-1h"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full gradient-pink text-white text-center py-2 rounded-lg font-bold hover:shadow-lg transition"
@@ -180,7 +180,7 @@ export default function Services() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Envie d'une beauté des ongles ?</h2>
           <a
-            href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+            href="https://calendly.com/mlbeauty77/semi-permanent-1h"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-8 py-3 rounded-full font-bold hover:shadow-lg transition"

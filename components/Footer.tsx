@@ -84,7 +84,7 @@ export default function Footer() {
               </a>
             </div>
             <a
-              href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+              href="https://calendly.com/mlbeauty77/semi-permanent-1h"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block bg-gradient-pink text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition"

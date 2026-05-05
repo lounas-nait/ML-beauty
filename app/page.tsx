@@ -109,7 +109,7 @@ export default function Home() {
                   </div>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <a
-                      href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+                      href="https://calendly.com/mlbeauty77/semi-permanent-1h"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"
@@ -409,7 +409,7 @@ export default function Home() {
             Disponibilités à partir de demain. Choisissez votre créneau directement sur le calendrier.
           </p>
           <a
-            href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+            href="https://calendly.com/mlbeauty77/semi-permanent-1h"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"

@@ -171,7 +171,7 @@ export default function Contact() {
                   Consultez mes disponibilités directement sur Calendly et choisissez le créneau qui vous convient
                 </p>
                 <a
-                  href="https://calendly.com/lounas-nait960/semi-permanent-1h"
+                  href="https://calendly.com/mlbeauty77/semi-permanent-1h"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full gradient-pink text-white text-center py-3 rounded-lg font-bold hover:shadow-lg transition"
