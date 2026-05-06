@@ -20,7 +20,7 @@ export interface Video {
 export const reviews: Review[] = [
   {
     id: 1,
-    name: 'Sophie M.',
+    name: 'Valérie',
     platform: 'Google',
     rating: 5,
     comment: 'Service impeccable, très professionnelle ! Les ongles sont magnifiques et durent longtemps. Je recommande vivement !',
@@ -29,16 +29,7 @@ export const reviews: Review[] = [
   },
   {
     id: 2,
-    name: 'Clara B.',
-    platform: 'Instagram',
-    rating: 5,
-    comment: "J'adore le confort de ne pas sortir de chez moi. Les prestations sont toujours de qualité et l'ambiance est super. Merci Lounas ! 💅",
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop',
-    date: '2024-04-10',
-  },
-  {
-    id: 3,
-    name: 'Léa D.',
+    name: 'Dyhia.',
     platform: 'Google',
     rating: 5,
     comment: 'Créative et à l\'écoute de mes envies. Les designs sont uniques et bien exécutés. Vraiment top !',
@@ -46,17 +37,8 @@ export const reviews: Review[] = [
     date: '2024-04-08',
   },
   {
-    id: 4,
-    name: 'Marine L.',
-    platform: 'TikTok',
-    rating: 5,
-    comment: 'Les vidéos de recréation que je vois en avant sont incroyables ! Vient faire les ongles de ouf 🔥💅',
-    image: 'https://images.unsplash.com/photo-1517530350426-30a90feb5eef?w=400&h=400&fit=crop',
-    date: '2024-04-05',
-  },
-  {
-    id: 5,
-    name: 'Jessica H.',
+    id: 3,
+    name: 'Laurie.',
     platform: 'Direct',
     rating: 5,
     comment: 'Excellente qualité de travail. Les ongles tiennent super bien et les couleurs sont exactement ce que je voulais. À bientôt !',
@@ -64,12 +46,12 @@ export const reviews: Review[] = [
     date: '2024-03-30',
   },
   {
-    id: 6,
-    name: 'Pauline R.',
+    id: 4,
+    name: 'Toutou.',
     platform: 'Google',
     rating: 5,
     comment: 'Service à domicile super pratique ! Les résultats valent vraiment le coup. Je suis devenue une cliente régulière.',
-    image: 'https://images.unsplash.com/photo-1506228613408-eca07ce68773?w=400&h=400&fit=crop',
+    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop',
     date: '2024-03-25',
   },
 ];

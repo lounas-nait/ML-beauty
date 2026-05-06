@@ -88,7 +88,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                     ✕
                 </button>
 
-                <h3 className="text-2xl font-bold text-center mb-6">
+                <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">
                     Réserver un rendez-vous
                 </h3>
 
@@ -114,12 +114,12 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                     <div className="flex justify-between items-center">
                                         <div>
                                             <span className="text-xl mr-2">{service.icon}</span>
-                                            <span className="font-semibold">
+                                            <span className="font-semibold text-gray-800">
                                                 {service.title}
                                             </span>
                                         </div>
 
-                                        <div className="flex items-center gap-2">
+                                        <div className="flex  font-semibold text-gray-800 items-center gap-2">
                                             {service.oldPrice && (
                                                 <span className="text-xl text-gray-400 line-through decoration-gray-400">
                                                     {service.oldPrice}

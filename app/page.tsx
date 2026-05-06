@@ -184,8 +184,8 @@ export default function Home() {
                 <div
                   key={review.id}
                   className={`absolute inset-0 transition-all duration-700 ease-out ${index === reviewSlide
-                      ? 'opacity-100 translate-x-0 scale-100'
-                      : 'opacity-0 scale-95'
+                    ? 'opacity-100 translate-x-0 scale-100'
+                    : 'opacity-0 scale-95'
                     }`}
                 >
                   <ReviewCard review={review} className="min-h-[300px]" />
@@ -237,7 +237,7 @@ export default function Home() {
       </section>
 
       {/* Services Preview */}
-      <section className="py-16 md:py-20 bg-white">
+      <section className="pt-20 pb-0 bg-white">
         <div className="container mx-auto px-4">
 
           {/* TITRE */}
@@ -406,20 +406,19 @@ export default function Home() {
           <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
             Disponibilités à partir de demain. Choisissez votre créneau directement sur le calendrier.
           </p>
-          <a
-            href="https://calendly.com/mlbeauty77/semi-permanent-1h"
-            target="_blank"
+          <button
+            onClick={() => setIsBookingOpen(true)}
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"
           >
             Réserver un rendez-vous →
-          </a>
+          </button>
         </div>
       </section>
       <BookingModal
-  isOpen={isBookingOpen}
-  onClose={() => setIsBookingOpen(false)}
-/>
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </>
   );
 }

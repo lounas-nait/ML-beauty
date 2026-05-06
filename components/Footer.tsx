@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
+import BookingModal from '../components/BookingModal';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -83,14 +88,13 @@ export default function Footer() {
                 <img src="/logos/tiktok.webp" alt="TikTok" />
               </a>
             </div>
-            <a
-              href="https://calendly.com/mlbeauty77/semi-permanent-1h"
-              target="_blank"
+            <button
+            onClick={() => setIsBookingOpen(true)}
               rel="noopener noreferrer"
               className="inline-block bg-gradient-pink text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition"
             >
               Réserver maintenant
-            </a>
+            </button>
           </div>
         </div>
 
@@ -106,6 +110,10 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      <BookingModal
+              isOpen={isBookingOpen}
+              onClose={() => setIsBookingOpen(false)}
+            />
     </footer>
   );
 }
