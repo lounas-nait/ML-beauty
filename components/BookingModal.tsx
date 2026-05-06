@@ -49,7 +49,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             title: 'Dépose',
             icon: '✨',
             price: '10€',
-            calendly: 'https://calendly.com/mlbeauty77/depose',
+            calendly: 'https://calendly.com/mlbeauty77/semi-permanent-1h',
         },
         {
             id: 'combo',
@@ -59,7 +59,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             price: '25€',
             promo: true,
             savings: '5€',
-            calendly: 'https://calendly.com/mlbeauty77/depose-semi',
+            calendly: 'https://calendly.com/mlbeauty77/semi-permanent-1h',
         },
     ];
 
