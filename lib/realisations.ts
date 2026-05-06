@@ -27,8 +27,8 @@ export const realisations =
           images: [
             '/images/realisattions/33.jpg',
             '/images/realisattions/3.jpg',
-            '/images/realisattions/P333.jpg',
-            '/images/realisattions/P3333.jpg',
+            '/images/realisattions/333.jpg',
+            '/images/realisattions/3333.jpg',
           ],
         },
       ];
