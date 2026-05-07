@@ -1,7 +1,5 @@
 'use client';
 
-
-
 export default function Services() {
   const services = [
 
@@ -148,16 +146,16 @@ export default function Services() {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">⏱️ Durée des Prestations</h3>
                 <ul className="space-y-2 text-gray-600">
-                  
-                  <li>• Semi-Permanent : 45 min à 1h</li>
-                  
-                  <li>• Dépose Semi-Permanent : 30 min</li>
+
+                  <li>• Semi-Permanent : 1h</li>
+
+                  <li>• Dépose Semi-Permanent : 45 min</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">💳 Modes de Paiement</h3>
                 <ul className="space-y-2 text-gray-600">
-                  <li>• Espèces</li>       
+                  <li>• Espèces</li>
                   <li>• Virement bancaire</li>
                 </ul>
               </div>

@@ -12,12 +12,12 @@ import BookingModal from '../components/BookingModal';
 const heroSlides = [
   {
     id: 1,
-    image: '/images/realisattions/P11.jpg',
+    image: '/images/realisattions/33.jpg',
     service: SERVICES[1], // semi-permanent
   },
   {
     id: 2,
-    image: '/images/realisattions/33.jpg',
+    image: '/images/realisattions/P11.jpg',
     service: SERVICES[6], // Semi-Permanent
   },
 
@@ -30,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 10000); // Change slide every 5 seconds
+    }, 6000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
   }, []);
@@ -66,13 +66,14 @@ export default function Home() {
   return (
     <>
       {/* Hero Carousel Section */}
-      <section className="relative h-[90vh] overflow-hidden">
+      <section className="relative h-[85vh] min-h-[600px] w-full overflow-hidden">
         {heroSlides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
               }`}
           >
+            {/* Image */}
             <Image
               src={slide.image}
               alt={slide.service.title}
@@ -80,50 +81,56 @@ export default function Home() {
               priority={index === 0}
               className="object-cover"
             />
-            {/* Dark Overlay */}
-            <div className="absolute inset-0 bg-black/40"></div>
-            {/* Content Overlay */}
-            <div className="absolute inset-0 flex items-center">
-              <div className="container mx-auto px-4">
+
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/50"></div>
+
+            {/* Content */}
+            <div className="relative z-20 flex items-center h-full">
+              <div className="container mx-auto px-6">
                 <div className="max-w-2xl text-white">
-                  <div className="mb-4">
-                    <span className="text-2xl">{slide.service.icon}</span>
+
+                  <div className="mb-4 text-2xl">
+                    {slide.service.icon}
                   </div>
-                  <h1 className="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4 leading-tight">
                     {slide.service.title}
                   </h1>
-                  <p className="text-xl mb-6 opacity-90">
+
+                  <p className="text-lg md:text-xl mb-6 opacity-90">
                     {slide.service.description}
                   </p>
-                  <div className="mb-6">
-                    <ul className="space-y-2">
-                      {slide.service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center">
-                          <span className="text-rose-400 mr-2">✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+
+                  <ul className="space-y-2 mb-6">
+                    {slide.service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center">
+                        <span className="text-rose-400 mr-2">✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+
                   <div className="text-3xl font-bold text-rose-400 mb-8">
                     {slide.service.price}
                   </div>
+
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button
                       onClick={() => setIsBookingOpen(true)}
-
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center bg-gradient-to-r from-rose-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"
+                      className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     >
                       Réserver maintenant →
                     </button>
+
                     <Link
                       href="/services"
-                      className="inline-flex items-center justify-center border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition"
+                      className="border-2 border-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300"
                     >
                       Voir toutes les prestations
                     </Link>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -133,24 +140,25 @@ export default function Home() {
         {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition"
+          className="absolute left-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition z-30"
         >
           ‹
         </button>
+
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition"
+          className="absolute right-6 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition z-30"
         >
           ›
         </button>
 
-        {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        {/* Indicators */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-30">
           {heroSlides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition ${index === currentSlide ? 'bg-white' : 'bg-white/50'
+              className={`w-3 h-3 rounded-full transition ${index === currentSlide ? "bg-white scale-110" : "bg-white/50"
                 }`}
             />
           ))}
