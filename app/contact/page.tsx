@@ -12,6 +12,7 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
 
+  /*
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -31,6 +32,7 @@ export default function Contact() {
     setFormData({ name: '', email: '', phone: '', message: '' });
     setTimeout(() => setSubmitted(false), 3000);
   };
+  */
 
   return (
     <>
