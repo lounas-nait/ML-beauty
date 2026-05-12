@@ -1,9 +1,11 @@
 'use client';
 
 
-export default function Contact() {
 
-/*
+export default function Contact() {
+  
+  
+  /*
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,7 +15,7 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -187,11 +189,11 @@ export default function Contact() {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Envoyez un Message</h2>
-              
-             
+
+            
 
               <form
-                action="https://formsubmit.co/mlbeauty.contactpro@gmail.com"
+                action="https://formsubmit.co/8ed80d22cd23c0959164be66c563166a"
                 method="POST"
                 className="space-y-6"
               >
