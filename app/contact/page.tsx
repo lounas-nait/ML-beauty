@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 
 export default function Contact() {
+
+/*
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,7 +13,7 @@ export default function Contact() {
 
   const [submitted, setSubmitted] = useState(false);
 
-  /*
+  
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -186,12 +187,8 @@ export default function Contact() {
             {/* Contact Form */}
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Envoyez un Message</h2>
-
-              {submitted && (
-                <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-700">
-                  ✅ Merci ! Votre message a bien été envoyé. Je vous recontacterai rapidement.
-                </div>
-              )}
+              
+             
 
               <form
                 action="https://formsubmit.co/mlbeauty.contactpro@gmail.com"
