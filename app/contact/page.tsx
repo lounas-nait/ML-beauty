@@ -79,7 +79,7 @@ export default function Contact() {
                 */}
 
                 {/* Email */}
-                
+
                 <div className="flex gap-4">
                   <div className="flex-shrink-0">
                     <div className="flex items-center justify-center h-12 w-12 rounded-md bg-gradient-pink text-white text-xl">
@@ -99,7 +99,7 @@ export default function Contact() {
                     </p>
                   </div>
                 </div>
-                
+
 
                 {/* Location */}
                 <div className="flex gap-4">
@@ -191,7 +191,18 @@ export default function Contact() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form
+                action="https://formsubmit.co/mlbeauty.contactpro@gmail.com"
+                method="POST"
+                className="space-y-6"
+              >
+
+                {/* CONFIG FORM SUBMIT */}
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_subject" value="Nouveau message depuis MLBeauty" />
+                <input type="hidden" name="_template" value="table" />
+                <input type="hidden" name="_next" value="https://tonsite.com/merci" />
+
                 {/* Name */}
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
@@ -201,8 +212,6 @@ export default function Contact() {
                     type="text"
                     id="name"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition"
                     placeholder="Sophie Dupont"
@@ -218,8 +227,6 @@ export default function Contact() {
                     type="email"
                     id="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition"
                     placeholder="sophie@example.com"
@@ -235,8 +242,6 @@ export default function Contact() {
                     type="tel"
                     id="phone"
                     name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition"
                     placeholder="+33 6 12 34 56 78"
                   />
@@ -250,8 +255,6 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
-                    value={formData.message}
-                    onChange={handleChange}
                     required
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition resize-none"
@@ -266,6 +269,7 @@ export default function Contact() {
                 >
                   Envoyer le Message
                 </button>
+
               </form>
 
               {/* Additional Info */}
