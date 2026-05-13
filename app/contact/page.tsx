@@ -1,11 +1,8 @@
 'use client';
 
-
+import { useState } from 'react';
 
 export default function Contact() {
-  
-  
-  /*
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,8 +10,8 @@ export default function Contact() {
     message: '',
   });
 
-  const [submitted, setSubmitted] = useState(false);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,14 +25,34 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would normally send the form data to your backend
-    // For now, just simulate a submission
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setFormData({ name: '', email: '', phone: '', message: '' });
-    setTimeout(() => setSubmitted(false), 3000);
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://formsubmit.co/8ed80d22cd23c0959164be66c563166a', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          _captcha: 'false',
+          _subject: 'Nouveau message depuis MLBeauty',
+          _template: 'table',
+        }),
+      });
+
+      if (response.ok) {
+        setShowSuccessModal(true);
+        setFormData({ name: '', email: '', phone: '', message: '' });
+      } else {
+        alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+      }
+    } catch (error) {
+      alert('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-  */
 
   return (
     <>
@@ -193,16 +210,9 @@ export default function Contact() {
             
 
               <form
-                action="https://formsubmit.co/8ed80d22cd23c0959164be66c563166a"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="space-y-6"
               >
-
-                {/* CONFIG FORM SUBMIT */}
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_subject" value="Nouveau message depuis MLBeauty" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_next" value="/" />
 
                 {/* Name */}
                 <div>
@@ -213,6 +223,8 @@ export default function Contact() {
                     type="text"
                     id="name"
                     name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition"
                     placeholder="Sophie Dupont"
@@ -228,6 +240,8 @@ export default function Contact() {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition"
                     placeholder="sophie@example.com"
@@ -243,6 +257,8 @@ export default function Contact() {
                     type="tel"
                     id="phone"
                     name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition"
                     placeholder="+33 6 12 34 56 78"
                   />
@@ -256,6 +272,8 @@ export default function Contact() {
                   <textarea
                     id="message"
                     name="message"
+                    value={formData.message}
+                    onChange={handleChange}
                     required
                     rows={6}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition resize-none"
@@ -266,9 +284,10 @@ export default function Contact() {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full gradient-pink text-white py-3 rounded-lg font-bold hover:shadow-lg transition transform hover:-translate-y-0.5"
+                  disabled={isSubmitting}
+                  className="w-full gradient-pink text-white py-3 rounded-lg font-bold hover:shadow-lg transition transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Envoyer le Message
+                  {isSubmitting ? 'Envoi en cours...' : 'Envoyer le Message'}
                 </button>
 
               </form>
@@ -342,6 +361,25 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-8 max-w-md mx-4 text-center">
+            <div className="text-6xl mb-4">🎉</div>
+            <h3 className="text-2xl font-bold text-green-600 mb-4">Message envoyé !</h3>
+            <p className="text-gray-600 mb-6">
+              Merci pour votre message. Je vous répondrai dans les plus brefs délais.
+            </p>
+            <button
+              onClick={() => setShowSuccessModal(false)}
+              className="gradient-pink text-white px-6 py-3 rounded-lg font-bold hover:shadow-lg transition"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
