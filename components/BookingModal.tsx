@@ -151,7 +151,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                             </a>
 
                             <a
-                                href="https://instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
+                                href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3 w-full p-4 rounded-xl border hover:bg-gray-50 transition"

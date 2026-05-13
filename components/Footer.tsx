@@ -79,7 +79,7 @@ export default function Footer() {
                 <img src="/logos/instagram.webp" alt="Instagram" />
               </a>
               <a
-                href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
+                href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-500 rounded-full flex items-center justify-center hover:shadow-lg transition text-white"

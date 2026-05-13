@@ -135,7 +135,7 @@ export default function Contact() {
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Zone de Déplacement</h3>
                     <p className="text-gray-700 font-semibold">Chessy 77700 et alentours</p>
                     <p className="text-gray-600 text-sm mt-1">
-                      Rayon d'action : jusqu'à 15 km de Chessy-Val d'europe
+                      Rayon d'action : jusqu'à 15 km de Chessy Val d'Europe
                     </p>
                   </div>
                 </div>
@@ -150,7 +150,7 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">Instagram</h3>
                     <a
-                      href="https://instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
+                      href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-rose-500 hover:text-rose-600 font-semibold"
@@ -173,7 +173,7 @@ export default function Contact() {
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">TikTok</h3>
                     <a
-                      href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
+                      href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-600 hover:text-700 font-semibold"
@@ -313,7 +313,7 @@ export default function Contact() {
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Zone de Déplacement</h2>
           <div className="mb-6 text-center">
             <p className="text-gray-600 mb-2">
-              Je me déplace gratuitement dans un rayon de <strong className="text-rose-600">15 km</strong> autour de Chessy Val d'Europe
+              Je me déplace aussi à domicile dans un rayon de <strong className="text-rose-600">15 km</strong> autour de Chessy Val d'Europe
             </p>
             <p className="text-sm text-gray-500">
               Au-delà de 15 km, contactez-moi pour un devis personnalisé

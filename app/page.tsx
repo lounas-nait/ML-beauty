@@ -266,11 +266,13 @@ export default function Home() {
                 icon: '💅',
                 title: 'Semi-Permanent',
                 description: 'Vernis semi-permanent 2-3 semaines',
+                price: '20€',
               },
               {
                 icon: '✨',
                 title: 'Dépose Semi-Permanent',
                 description: 'Retrait du vernis semi-permanent en douceur',
+                price: 'à partir de 5€',
               },
 
               /*
@@ -295,6 +297,10 @@ export default function Home() {
                 <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
                   {service.title}
                 </h3>
+
+                <div className="text-2xl font-bold text-rose-500 mb-3">
+                  {service.price}
+                </div>
 
                 <p className="text-gray-600 text-sm md:text-base">
                   {service.description}
@@ -410,7 +416,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-rose-500 to-pink-500">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">Prête à vous réserver ?</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">Prête à prendre rendez-vous ?</h2>
           <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
             Disponibilités à partir de demain. Choisissez votre créneau directement sur le calendrier.
           </p>

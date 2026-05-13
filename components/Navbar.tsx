@@ -72,7 +72,7 @@ export default function Navbar() {
                   : "text-gray-700 hover:text-rose-500"
               }`}
             >
-              Contacts
+              Contact
             </Link>
 
             {/* Bouton Réserver Desktop */}

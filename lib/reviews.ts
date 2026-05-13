@@ -21,41 +21,43 @@ export const reviews: Review[] = [
   {
     id: 1,
     name: 'Valérie',
-    platform: 'Google',
-    rating: 5,
-    comment: 'Service impeccable, très professionnelle ! Les ongles sont magnifiques et durent longtemps. Je recommande vivement !',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop',
-    date: '2024-04-15',
+    platform: 'Instagram',
+    rating: 4.5,
+    comment: 'Très pro, mes ongles tiennent super bien.',
+    image: '/profile-icon.svg',
+    date: '2026-05-10',
   },
   {
     id: 2,
-    name: 'Dyhia.',
-    platform: 'Google',
-    rating: 5,
-    comment: 'Créative et à l\'écoute de mes envies. Les designs sont uniques et bien exécutés. Vraiment top !',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
-    date: '2024-04-08',
+    name: 'Dyhia',
+    platform: 'Instagram',
+    rating:5,
+    comment: 'Rapide, doux et le rendu est parfait.',
+    image: '/profile-icon.svg',
+    date: '2026-04-08',
   },
   {
     id: 3,
-    name: 'Laurie.',
-    platform: 'Direct',
-    rating: 5,
-    comment: 'Excellente qualité de travail. Les ongles tiennent super bien et les couleurs sont exactement ce que je voulais. À bientôt !',
-    image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&h=400&fit=crop',
-    date: '2024-03-30',
+    name: 'Laurie',
+    platform: 'Instagram',
+    rating: 4.5,
+    comment: 'J\'adore mes ongles, service au top !',
+    image: '/profile-icon.svg',
+    date: '2026-04-30',
   },
   {
     id: 4,
-    name: 'Toutou.',
-    platform: 'Google',
+    name: 'Sofia',
+    platform: 'Instagram',
     rating: 5,
-    comment: 'Service à domicile super pratique ! Les résultats valent vraiment le coup. Je suis devenue une cliente régulière.',
-    image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=400&h=400&fit=crop',
-    date: '2024-03-25',
+    comment: 'Très agréable, je recommande vivement.',
+    image: '/profile-icon.svg',
+    date: '2026-04-25',
   },
 ];
 
+
+/*
 // Mock videos data
 export const reviewVideos: Video[] = [
   {
@@ -80,6 +82,7 @@ export const reviewVideos: Video[] = [
     thumbnail: 'https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=300&h=600&fit=crop',
   },
 ];
+*/
 
 // Aggregate data
 export const getAverageRating = () => {

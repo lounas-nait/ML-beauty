@@ -8,7 +8,7 @@ export default function Services() {
       icon: '💅',
       title: 'Semi-Permanent',
       description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
-      features: ['Durée : 2-3 semaines', 'Sans lime à ongles', 'Finition brillante impeccable'],
+      features: ['Durée : 2-3 semaines', 'Finition brillante impeccable'],
       price: '20€',
     },
     {
@@ -37,7 +37,7 @@ export default function Services() {
       icon: '🎨',
       title: 'Nail Art Personnalisé',
       description: 'Designs créatifs et originaux adaptés à vos envies',
-      features: ['Designs uniques', 'Motifs variés', 'Stones et paillettes disponibles'],
+      features: ['Designs uniques', 'Motifs variés', 'Strass et paillettes disponibles'],
       price: 'À partir de 50€',
     },
     {
@@ -45,7 +45,7 @@ export default function Services() {
       icon: '👑',
       title: 'Stylage Ongles Naturels',
       description: 'Mise en forme et traitement des ongles naturels',
-      features: ['Limage professionnelle', 'Cuticules traitées', 'Vernis ou color finition'],
+      features: ['Limage professionnelle', 'Cuticules traitées', 'Vernis ou finition colorée'],
       price: 'À partir de 25€',
     },
     {
@@ -53,7 +53,7 @@ export default function Services() {
       icon: '💍',
       title: 'Nail Art Complexe',
       description: 'Créations artisanales avec détails et techniques avancées',
-      features: ['3D et effects', 'Peinture acrylique', 'Décoration luxe'],
+      features: ['3D et effets', 'Peinture acrylique', 'Décoration luxe'],
       price: 'À partir de 60€',
     },
     {
@@ -149,6 +149,7 @@ export default function Services() {
                 <h3 className="text-xl font-bold text-gray-900 mb-4">🏠 Service à Domicile</h3>
                 <p className="text-gray-600 mb-4">
                   Je me déplace aussi à votre domicile pour votre confort. Plus besoin de vous faire la route !
+                  Le déplacement est facturé 5€ supplémentaires jusqu'à 5 km. Au-delà, le tarif est sur demande.
                 </p>
                 <p className="text-gray-600">
                   <strong>Zone d'intervention :</strong> Chessy et alentours (jusqu'à 15 km)

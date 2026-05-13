@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import ReviewCard, { StarRating, PlatformBadge } from '@/components/ReviewCard';
-import { reviews, reviewVideos, getAverageRating, getTotalReviews, getRatingDistribution } from '@/lib/reviews';
+import ReviewCard, { StarRating } from '@/components/ReviewCard';
+import { reviews, getAverageRating, getTotalReviews, getRatingDistribution } from '@/lib/reviews';
+import { realisations } from '@/lib/realisations';
 
 export default function ReviewsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoScroll, setAutoScroll] = useState(true);
+  const [selectedRealisation, setSelectedRealisation] = useState<number | null>(null);
 
   const averageRating = getAverageRating();
   const totalReviews = getTotalReviews();
@@ -173,75 +175,77 @@ export default function ReviewsPage() {
         </div>
       </section>
 
-      {/* Video Reviews Section */}
+      {/* Réalisations Section */}
       <section className="py-24 px-4 bg-gray-50">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">Vidéos de nos réalisations</h2>
-          <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
-            Découvrez nos créations en vidéo sur Instagram et TikTok
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviewVideos.map((video) => (
-              <a
-                key={video.id}
-                href={video.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative h-96 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                {/* Video Thumbnail */}
-                <Image
-                  src={video.thumbnail || ''}
-                  alt={video.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center">
-                  <div className="text-white text-center">
-                    <div className="inline-block mb-4 p-3 bg-white/20 backdrop-blur rounded-full">
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                      </svg>
-                    </div>
-                    <p className="font-bold">{video.title}</p>
-                    <span className="text-sm opacity-90 mt-1 block">{video.platform}</span>
-                  </div>
-                </div>
-
-                {/* Platform Badge */}
-                <div className="absolute top-4 right-4 z-10">
-                  <PlatformBadge platform={video.platform} />
-                </div>
-              </a>
-            ))}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Mes Réalisations</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Cliquez sur une photo pour voir le détail de la réalisation.
+            </p>
           </div>
 
-          <div className="text-center mt-12">
-            <p className="text-gray-600 mb-4">Suivez-nous pour voir plus de contenu exclusif</p>
-            <div className="flex justify-center gap-4">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white px-6 py-3 rounded-full font-bold hover:shadow-lg transition-shadow"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {realisations.map((realisation) => (
+              <button
+                key={realisation.id}
+                type="button"
+                onClick={() => setSelectedRealisation(realisation.id)}
+                className="group relative overflow-hidden rounded-3xl shadow-lg border border-gray-200 bg-white"
               >
-                📱 Instagram
-              </a>
-              <a
-                href="https://tiktok.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full font-bold hover:shadow-lg transition-shadow"
-              >
-                🎵 TikTok
-              </a>
-            </div>
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={realisation.images[0]}
+                    alt={realisation.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6 text-left">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{realisation.title}</h3>
+                  <p className="text-gray-600">{realisation.category}</p>
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </section>
+
+      {selectedRealisation && (
+        <div
+          className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4"
+          onClick={() => setSelectedRealisation(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl rounded-3xl overflow-hidden bg-white shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedRealisation(null)}
+              className="absolute top-4 right-4 z-20 bg-white/90 text-gray-900 rounded-full p-3 hover:bg-white"
+              aria-label="Fermer"
+            >
+              ✕
+            </button>
+            <div className="relative h-[70vh] bg-gray-100">
+              <Image
+                src={realisations.find((item) => item.id === selectedRealisation)?.images[0] ?? ''}
+                alt={realisations.find((item) => item.id === selectedRealisation)?.title ?? 'Réalisation'}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="p-6 text-left">
+              <h3 className="text-3xl font-bold text-gray-900 mb-3">
+                {realisations.find((item) => item.id === selectedRealisation)?.title}
+              </h3>
+              <p className="text-gray-600">
+                {realisations.find((item) => item.id === selectedRealisation)?.category}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* CTA Section */}
       <section className="py-24 px-4 bg-gradient-to-r from-rose-500 to-pink-500">
@@ -261,7 +265,7 @@ export default function ReviewsPage() {
               ⭐ Google Avis
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white text-rose-500 px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-shadow hover:-translate-y-1"
@@ -269,7 +273,7 @@ export default function ReviewsPage() {
               📸 Instagram DM
             </a>
             <a
-              href="https://tiktok.com"
+              href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white text-rose-500 px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-shadow hover:-translate-y-1"
@@ -279,7 +283,7 @@ export default function ReviewsPage() {
           </div>
 
           <div className="mt-12 pt-12 border-t border-white/30">
-            <p className="text-sm opacity-90">Les avis Google aident davantage le référencement local de our salon. Merci 🙏</p>
+            <p className="text-sm opacity-90">Les avis Google aident davantage le référencement local de notre salon. Merci 🙏</p>
           </div>
         </div>
       </section>

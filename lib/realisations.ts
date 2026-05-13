@@ -4,6 +4,7 @@ export const realisations =
           id: 1,
           title: "Semi-permanent rouge",
           category: "Rouge",
+          platform: 'Instagram',
           images: [
             '/images/realisattions/P11.jpg',
             '/images/realisattions/P1.jpg',
@@ -12,8 +13,9 @@ export const realisations =
         },
         {
           id: 2,
-          title: "Semi-permanent viollet",
+          title: "Semi-permanent violet",
           category: "Violet",
+          platform: 'Instagram',
           images: [
             '/images/realisattions/P2.jpg',
             '/images/realisattions/P22.jpg',
@@ -24,6 +26,7 @@ export const realisations =
           id: 3,
           title: "Semi-permanent Nude",
           category: "Nude",
+          platform: 'Instagram',
           images: [
             '/images/realisattions/33.jpg',
             '/images/realisattions/3.jpg',
@@ -35,8 +38,18 @@ export const realisations =
           id: 4,
           title: "Semi-permanent Nude",
           category: "Nude",
+          platform: 'Instagram',
           images: [
             '/images/realisattions/44.jpg',           
+          ],
+        },
+        {
+          id: 5,
+          title: "Semi-permanent Nude",
+          category: "Nude",
+          platform: 'Instagram',
+          images: [
+            '/images/realisattions/55.jpg',           
           ],
         },
       ];

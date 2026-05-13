@@ -7,7 +7,7 @@ export const SITE_URL = 'https://nails-beauty.com';
 export const PHONE = '+33 6 12 34 56 78';
 export const EMAIL = 'contact@nailsbeauty.com';
 export const WHATSAPP_LINK = 'https://wa.me/33612345678';
-export const INSTAGRAM_LINK = 'https://instagram.com/nails_beauty_paris';
+export const INSTAGRAM_LINK = 'https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/nails_beauty_paris';
 
 // Booking
 export const CALENDLY_LINK = 'https://calendly.com/mlbeauty77/semi-permanent-1h';
@@ -61,7 +61,7 @@ export const SERVICES = [
     title: 'Nail Art Personnalisé',
     slug: 'nail-art',
     description: 'Designs créatifs et originaux adaptés à vos envies',
-    features: ['Designs uniques', 'Motifs variés', 'Stones et paillettes disponibles'],
+    features: ['Designs uniques', 'Motifs variés', 'Strass et paillettes disponibles'],
     price: 'À partir de 50€',
   },
   {
@@ -70,7 +70,7 @@ export const SERVICES = [
     title: 'Stylage Ongles Naturels',
     slug: 'stylage-natural',
     description: 'Mise en forme et traitement des ongles naturels',
-    features: ['Limage professionnelle', 'Cuticules traitées', 'Vernis ou color finition'],
+    features: ['Limage professionnelle', 'Cuticules traitées', 'Vernis ou finition colorée'],
     price: 'À partir de 25€',
   },
   {
@@ -79,7 +79,7 @@ export const SERVICES = [
     title: 'Nail Art Complexe',
     slug: 'nail-art-complex',
     description: 'Créations artisanales avec détails et techniques avancées',
-    features: ['3D et effects', 'Peinture acrylique', 'Décoration luxe'],
+    features: ['3D et effets', 'Peinture acrylique', 'Décoration luxe'],
     price: 'À partir de 60€',
   },
   {
@@ -133,7 +133,7 @@ export const TESTIMONIALS = [
 export const FAQ = [
   {
     q: 'Quel est le prix des prestations ?',
-    a: 'Les tarifs dépendent de la prestation. La pose gel commence à partir de 45€, le semi-permanent à 35€. Les tarifs exacts seront affichés lors de votre rendez-vous.',
+    a: 'Les tarifs dépendent de la prestation. La pose gel commence à partir de 20€, le semi-permanent à 35€. Les tarifs exacts seront affichés lors de votre rendez-vous.',
   },
   {
     q: 'Proposez-vous des réductions pour les clients réguliers ?',
