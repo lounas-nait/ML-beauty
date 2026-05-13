@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import MapComponent from '@/components/MapComponent';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -207,7 +208,7 @@ export default function Contact() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-8">Envoyez un Message</h2>
 
-            
+
 
               <form
                 onSubmit={handleSubmit}
@@ -306,19 +307,19 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map Section (placeholder) */}
+      {/* Map Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Zone de Déplacement</h2>
-          <div className="rounded-xl overflow-hidden shadow-lg h-96 bg-gray-200 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-2xl mb-2">🗺️</p>
-              <p className="text-gray-600">Chessy-Val d'europe</p>
-              <p className="text-sm text-gray-500 mt-2">
-                Consultez vos décalages de déplacement sur Calendly
-              </p>
-            </div>
+          <div className="mb-6 text-center">
+            <p className="text-gray-600 mb-2">
+              Je me déplace gratuitement dans un rayon de <strong className="text-rose-600">15 km</strong> autour de Chessy Val d'Europe
+            </p>
+            <p className="text-sm text-gray-500">
+              Au-delà de 15 km, contactez-moi pour un devis personnalisé
+            </p>
           </div>
+          <MapComponent />
         </div>
       </section>
 
@@ -329,29 +330,37 @@ export default function Contact() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
-                q: 'Quel est le prix des prestations ?',
-                a: 'Les tarifs dépendent de la prestation. La pose gel commence à partir de 45€, le semi-permanent à 35€. Les tarifs exacts seront affichés lors de votre rendez-vous.',
+                q: "Quelles prestations proposez-vous ?",
+                a: "Je propose la pose de semi-permanent, la dépose ainsi que la formule dépose + nouvelle pose à tarif avantageux."
               },
               {
-                q: 'Proposez-vous des réductions pour les clients réguliers ?',
-                a: 'Oui ! Une formule abonnement est disponible. Contactez-moi pour les détails.',
+                q: "Quels sont vos tarifs ?",
+                a: "Semi-permanent : 20€ | Dépose : 10€ | Dépose + nouvelle pose : 25€ (au lieu de 30€)."
+              },
+              {
+                q: "Où se déroulent les rendez-vous ?",
+                a: "Je reçois les clientes à mon domicile dans un espace dédié et confortable."
               },
               {
                 q: 'Puis-je me faire rembourser si je suis insatisfaite ?',
                 a: 'Je vous propose un rendez-vous de retouche gratuite si vous n\'êtes pas satisfaite. Votre satisfaction est ma priorité !',
               },
               {
-                q: 'Combien de temps durent les ongles ?',
-                a: 'Gel : 3-4 semaines | Semi-permanent : 2-3 semaines | Les ongles naturels : dépend de votre entretien',
+                q: 'Combien de temps durent le semi-permanent ?',
+                a: 'Semi-permanent : 2-3 semaines | Les ongles naturels : dépend de votre entretien',
               },
               {
-                q: 'Y a-t-il un supplément pour le déplacement ?',
-                a: 'Non, le déplacement est offert sur Paris et Île-de-France (15 km). Au-delà, consultez-moi pour un tarif spécial.',
+                q: "Proposez-vous des déplacements à domicile ?",
+                a: "Oui, je peux me déplacer dans un rayon de 15 km. Le déplacement est facturé 5€ supplémentaires jusqu'à 5 km. Au-delà, le tarif est sur demande."
               },
               {
-                q: 'Comment se déroule un premier rendez-vous ?',
-                a: 'J\'arrive 10 min avant pour installer mon matériel. Nous discutons de votre projet, je propose des idées, puis on crée ensemble !',
+                q: "Combien de temps dure une prestation ?",
+                a: "La pose de semi-permanent dure environ 1h selon l'état des ongles."
               },
+              {
+                q: "Comment prendre rendez-vous ?",
+                a: "Vous pouvez réserver directement via le site ou me contacter via Instagram."
+              }
             ].map((item, idx) => (
               <div key={idx} className="p-6 rounded-lg bg-rose-50 border border-rose-200">
                 <h3 className="font-bold text-gray-900 mb-3">{item.q}</h3>

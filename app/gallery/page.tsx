@@ -20,17 +20,28 @@ export default function Gallery() {
   return (
     <>
       {/* Hero Section */}
-      <section className="gradient-to-br from-rose-50 to-pink-50 py-20">
-        <div className="container mx-auto px-4">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">Ma Galerie</h1>
-          <p className="text-xl text-gray-600 max-w-2xl">
-            Découvrez mes dernières réalisations et laissez-vous inspirer pour vos prochains ongles
-          </p>
+      <section
+        className="relative min-h-[70vh] bg-top bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/couleurs.png')",
+          backgroundSize: '100% auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'top center',
+        }}
+      >
+        <div className="absolute inset-0 bg-white/20" />
+        <div className="container mx-auto px-4 relative z-10 flex min-h-[70vh] items-start pt-8">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500 mb-4">Ma Galerie</h1>
+            <p className="text-xl text-gray-800 max-w-2xl">
+              Découvrez mes dernières réalisations et laissez-vous inspirer pour vos prochains ongles
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Filter Buttons */}
-      <section className="py-12 bg-white border-b border-gray-100">
+      <section className="py-4 bg-white border-b border-gray-100">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((category) => (
@@ -51,7 +62,7 @@ export default function Gallery() {
       </section>
 
       {/* Gallery Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {filteredItems.map((item) => (
@@ -117,7 +128,7 @@ export default function Gallery() {
       )}
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-rose-500 to-pink-500">
+      <section className="py-16 bg-gradient-to-r from-rose-500 to-pink-500">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">
             Une de ces réalisations vous plaît ?

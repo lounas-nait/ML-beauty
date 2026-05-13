@@ -70,17 +70,28 @@ export default function Services() {
   return (
     <>
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-rose-50 to-pink-50 py-20">
-        <div className="container mx-auto px-4">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">Mes Prestations</h1>
-          <p className="text-xl text-gray-600 max-w-2xl">
-            Des services haut de gamme adaptés à tous vos besoins pour des ongles magnifiques
-          </p>
+      <section
+        className="relative min-h-[70vh] bg-top bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/couleurs.png')",
+          backgroundSize: '100% auto',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'top center',
+        }}
+      >
+        <div className="absolute inset-0 bg-white/20" />
+        <div className="container mx-auto px-4 relative z-10 flex min-h-[70vh] items-start pt-8">
+          <div className="max-w-3xl">
+            <h1 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500 mb-6">Mes Prestations</h1>
+            <p className="text-xl text-gray-800 max-w-2xl">
+              Des services haut de gamme adaptés à tous vos besoins pour des ongles magnifiques
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-4 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
@@ -129,7 +140,7 @@ export default function Services() {
       </section>
 
       {/* Info Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="bg-white rounded-xl p-8 md:p-12 border border-rose-100">
             <h2 className="text-3xl font-bold text-gray-900 mb-8">Informations Pratiques</h2>
@@ -174,7 +185,7 @@ export default function Services() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 gradient-pink">
+      <section className="py-12 gradient-pink">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Envie d'une beauté des ongles ?</h2>
           <a
