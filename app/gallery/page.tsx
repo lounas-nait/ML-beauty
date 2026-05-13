@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import BookingModal from '../../components/BookingModal';
 import {realisations}  from '../../lib/realisations';
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   
 
@@ -136,16 +138,19 @@ export default function Gallery() {
           <p className="text-white text-lg mb-8">
             Réservez votre rendez-vous et créons ensemble votre look idéal
           </p>
-          <a
-            href="https://calendly.com/mlbeauty77/semi-permanent-1h"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => setIsBookingOpen(true)}
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-10 py-4 rounded-full font-bold hover:shadow-lg transition"
           >
             Réserver maintenant →
-          </a>
+          </button>
         </div>
       </section>
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </>
   );
 }

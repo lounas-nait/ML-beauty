@@ -1,6 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+import BookingModal from '../../components/BookingModal';
+
 export default function Services() {
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
   const services = [
 
     {
@@ -124,14 +128,13 @@ export default function Services() {
 
                 {/* Card Footer */}
                 <div className="p-8 bg-gradient-to-r from-rose-50 to-pink-50 border-t border-rose-100">
-                  <a
-                    href="https://calendly.com/mlbeauty77/semi-permanent-1h"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => setIsBookingOpen(true)}
                     className="block w-full gradient-pink text-white text-center py-2 rounded-lg font-bold hover:shadow-lg transition"
                   >
                     Réserver cette prestation
-                  </a>
+                  </button>
                 </div>
               </div>
             ))}
@@ -189,16 +192,19 @@ export default function Services() {
       <section className="py-12 gradient-pink">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Envie d'une beauté des ongles ?</h2>
-          <a
-            href="https://calendly.com/mlbeauty77/semi-permanent-1h"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => setIsBookingOpen(true)}
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-8 py-3 rounded-full font-bold hover:shadow-lg transition"
           >
             Réserver maintenant →
-          </a>
+          </button>
         </div>
       </section>
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </>
   );
 }

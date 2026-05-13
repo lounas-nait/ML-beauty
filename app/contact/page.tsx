@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import MapComponent from '@/components/MapComponent';
+import BookingModal from '@/components/BookingModal';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -193,14 +195,13 @@ export default function Contact() {
                 <p className="text-gray-600 mb-6">
                   Consultez mes disponibilités directement sur Calendly et choisissez le créneau qui vous convient
                 </p>
-                <a
-                  href="https://calendly.com/mlbeauty77/semi-permanent-1h"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={() => setIsBookingOpen(true)}
                   className="block w-full gradient-pink text-white text-center py-3 rounded-lg font-bold hover:shadow-lg transition"
                 >
-                  Accéder à Calendly
-                </a>
+                  Réserver maintenant
+                </button>
               </div>
             </div>
 
@@ -389,6 +390,10 @@ export default function Contact() {
           </div>
         </div>
       )}
+      <BookingModal
+        isOpen={isBookingOpen}
+        onClose={() => setIsBookingOpen(false)}
+      />
     </>
   );
 }

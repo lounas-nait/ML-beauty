@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-50 bg-white shadow-md">
+      <nav className="sticky top-0 z-[1100] bg-white shadow-md">
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
 
           {/* Logo */}
