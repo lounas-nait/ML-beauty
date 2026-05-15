@@ -52,4 +52,17 @@ export const realisations =
             '/images/realisattions/55.jpg',           
           ],
         },
+        {
+          id: 6,
+          title: "Semi-permanent Prune",
+          category: "Prune",
+          platform: 'Instagram',
+          images: [
+            '/images/realisattions/6666.jpg',
+            '/images/realisattions/666.png',
+            '/images/realisattions/66.png',
+            
+            
+          ],
+        },
       ];
