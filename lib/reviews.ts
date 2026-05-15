@@ -29,10 +29,10 @@ export const reviews: Review[] = [
   },
   {
     id: 2,
-    name: 'Dyhia',
+    name: 'Toutou',
     platform: 'Instagram',
     rating:5,
-    comment: 'Rapide, doux et le rendu est parfait.',
+    comment: 'Rapide doux et le rendu est parfait.',
     image: '/profile-icon.svg',
     date: '2026-04-08',
   },
@@ -47,7 +47,7 @@ export const reviews: Review[] = [
   },
   {
     id: 4,
-    name: 'Sofia',
+    name: 'Soumia',
     platform: 'Instagram',
     rating: 5,
     comment: 'Très agréable, je recommande vivement.',

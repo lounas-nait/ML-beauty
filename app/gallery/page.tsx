@@ -100,7 +100,7 @@ export default function Gallery() {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[1200] bg-black/80 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
           <div

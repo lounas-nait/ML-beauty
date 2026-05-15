@@ -369,7 +369,7 @@ export default function Home() {
 
                 {/* MODAL RESPONSIVE */}
                 {selectedRealisation && (
-                  <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-3 sm:p-6">
+                  <div className="fixed inset-0 bg-black/80 z-[1200] flex items-center justify-center p-3 sm:p-6">
 
                     <div className="relative bg-white rounded-2xl w-full max-w-5xl max-h-[95vh] overflow-y-auto p-4 sm:p-6">
 
