@@ -12,7 +12,7 @@ interface Service {
     title: string;
     icon: string;
     price: string;
-    calendly: string;
+    cal: string;
     oldPrice?: string;
     promo?: boolean;
     savings?: string;
@@ -42,14 +42,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             title: 'Semi-Permanent',
             icon: '💅',
             price: '20€',
-            calendly: 'https://calendly.com/mlbeauty77/semi-permanent-1h',
+            cal: 'https://cal.com/mlbeauty-t9m0ee/semi-permanent',
         },
         {
             id: 'depose',
             title: 'Dépose',
             icon: '✨',
             price: '10€',
-            calendly: 'https://calendly.com/mlbeauty77/semi-permanent-1h',
+            cal: 'https://cal.com/mlbeauty-t9m0ee/depose',
         },
         {
             id: 'combo',
@@ -59,7 +59,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             price: '25€',
             promo: true,
             savings: '5€',
-            calendly: 'https://calendly.com/mlbeauty77/semi-permanent-1h',
+            cal: 'https://cal.com/mlbeauty-t9m0ee/depose-pose',
         },
     ];
 
@@ -142,7 +142,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
                         <div className="space-y-4">
                             <a
-                                href={selected?.calendly}
+                                href={selected?.cal}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="block w-full text-center p-4 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold hover:shadow-lg transition"
