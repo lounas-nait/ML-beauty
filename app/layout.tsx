@@ -3,6 +3,7 @@ import Script from 'next/script';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import './globals.css';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 
 export const metadata: Metadata = {
   title: "ML Beauty - Semi-Permanent & Dépose à Chessy",
@@ -51,9 +52,22 @@ export default function RootLayout({
           src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
           strategy="beforeInteractive"
         />
+        {/* Google Analytics 4 - charge après l'interactivité */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-5LK89NEFC9"
+          strategy="afterInteractive"
+          id="ga-script"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);} 
+gtag('js', new Date());
+gtag('config', 'G-5LK89NEFC9');`}
+        </Script>
       </head>
       <body>
         <Navbar />
+        <GoogleAnalytics />
         <main>{children}</main>
         <Footer />
       </body>
