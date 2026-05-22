@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import BookingModal from './BookingModal';
+import ReserveButton from './ReserveButton';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -76,12 +77,12 @@ export default function Navbar() {
             </Link>
 
             {/* Bouton Réserver Desktop */}
-            <button
+            <ReserveButton
               onClick={() => setIsBookingOpen(true)}
               className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium hover:shadow-lg transition"
             >
               Réserver
-            </button>
+            </ReserveButton>
 
           </div>
 
@@ -135,7 +136,7 @@ export default function Navbar() {
             </Link>
 
             {/* Bouton Réserver Mobile */}
-            <button
+            <ReserveButton
               onClick={() => {
                 setIsOpen(false);
                 setIsBookingOpen(true);
@@ -143,7 +144,7 @@ export default function Navbar() {
               className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-6 py-2 rounded-full font-medium text-center block mt-2"
             >
               Réserver
-            </button>
+            </ReserveButton>
 
           </div>
         )}

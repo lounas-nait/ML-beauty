@@ -8,6 +8,7 @@ import { reviews, getAverageRating } from '../lib/reviews';
 import ReviewCard from '../components/ReviewCard';
 import { realisations } from '../lib/realisations';
 import BookingModal from '../components/BookingModal';
+import ReserveButton from '../components/ReserveButton';
 
 const heroSlides = [
   {
@@ -116,12 +117,12 @@ export default function Home() {
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <button
+                    <ReserveButton
                       onClick={() => setIsBookingOpen(true)}
                       className="bg-gradient-to-r from-rose-500 to-pink-500 text-white px-8 py-3 rounded-full font-bold text-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     >
                       Réserver maintenant →
-                    </button>
+                    </ReserveButton>
 
                     <Link
                       href="/services"
@@ -420,13 +421,12 @@ export default function Home() {
           <p className="text-white text-lg mb-8 max-w-2xl mx-auto">
             Disponibilités à partir de demain. Choisissez votre créneau directement sur le calendrier.
           </p>
-          <button
+          <ReserveButton
             onClick={() => setIsBookingOpen(true)}
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-10 py-4 rounded-full font-bold text-lg hover:shadow-lg transition transform hover:-translate-y-1"
           >
             Réserver un rendez-vous →
-          </button>
+          </ReserveButton>
         </div>
       </section>
       <BookingModal

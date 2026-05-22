@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import MapComponent from '@/components/MapComponent';
 import BookingModal from '@/components/BookingModal';
+import ReserveButton from '@/components/ReserveButton';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -195,13 +196,13 @@ export default function Contact() {
                 <p className="text-gray-600 mb-6">
                   Consultez mes disponibilités directement sur Calendly et choisissez le créneau qui vous convient
                 </p>
-                <button
+                <ReserveButton
                   type="button"
                   onClick={() => setIsBookingOpen(true)}
                   className="block w-full gradient-pink text-white text-center py-3 rounded-lg font-bold hover:shadow-lg transition"
                 >
                   Réserver maintenant
-                </button>
+                </ReserveButton>
               </div>
             </div>
 

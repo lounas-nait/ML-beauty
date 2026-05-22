@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import BookingModal from '../../components/BookingModal';
+import ReserveButton from '../../components/ReserveButton';
 import {realisations}  from '../../lib/realisations';
 
 export default function Gallery() {
@@ -138,13 +139,13 @@ export default function Gallery() {
           <p className="text-white text-lg mb-8">
             Réservez votre rendez-vous et créons ensemble votre look idéal
           </p>
-          <button
+          <ReserveButton
             type="button"
             onClick={() => setIsBookingOpen(true)}
             className="inline-flex items-center gap-2 bg-white text-rose-500 px-10 py-4 rounded-full font-bold hover:shadow-lg transition"
           >
             Réserver maintenant →
-          </button>
+          </ReserveButton>
         </div>
       </section>
       <BookingModal

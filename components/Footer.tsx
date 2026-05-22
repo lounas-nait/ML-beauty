@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import BookingModal from '../components/BookingModal';
+import ReserveButton from './ReserveButton';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -88,13 +89,12 @@ export default function Footer() {
                 <img src="/logos/tiktok.webp" alt="TikTok" />
               </a>
             </div>
-            <button
-            onClick={() => setIsBookingOpen(true)}
-              rel="noopener noreferrer"
+            <ReserveButton
+              onClick={() => setIsBookingOpen(true)}
               className="inline-block bg-gradient-pink text-white px-4 py-2 rounded-full text-sm font-medium hover:shadow-lg transition"
             >
               Réserver maintenant
-            </button>
+            </ReserveButton>
           </div>
         </div>
 
