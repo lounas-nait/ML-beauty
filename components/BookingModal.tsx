@@ -21,6 +21,13 @@ interface Service {
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
     const [selectedService, setSelectedService] = useState<string | null>(null);
 
+    const trackReservationChoice = (eventName: string) => {
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', eventName, {
+                page_path: window.location.pathname,
+            });
+        }
+    };
     // 🔒 Bloque le scroll quand modal ouvert
     useEffect(() => {
         if (isOpen) {
@@ -145,6 +152,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                 href={selected?.cal}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackReservationChoice('reservation_choice_online')}
                                 className="block w-full text-center p-4 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold hover:shadow-lg transition"
                             >
                                 📅 Réserver en ligne
@@ -154,6 +162,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                                 href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() => trackReservationChoice('reservation_choice_instagram')}
                                 className="flex items-center justify-center gap-3 w-full p-4 rounded-xl border hover:bg-gray-50 transition"
                             >
                                 <img
