@@ -65,4 +65,35 @@ export const realisations =
             
           ],
         },
+        {
+          id: 7,
+          title: "Semi-permanent Bleu pastel",
+          category: "bleu",
+          platform: 'Instagram',
+          images: [
+            '/images/realisattions/99.jpg',
+            '/images/realisattions/999.jpg',             
+          ],
+        },
+        {
+          id: 8,
+          title: "Semi-permanent Nude",
+          category: "Nude",
+          platform: 'Instagram',
+          images: [
+            '/images/realisattions/77.png',
+                        
+          ],
+        },
+        {
+          id: 9,
+          title: "Semi-permanent Nude",
+          category: "Nude",
+          platform: 'Instagram',
+          images: [
+            '/images/realisattions/88.png',
+                        
+          ],
+        },
+        
       ];
