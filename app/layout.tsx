@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
-    url: 'https://nails-beauty.com',
+    url: 'https://mlbeauty.org',
     siteName: 'ML Beauty',
     title: 'ML Beauty - Semi-Permanent & Dépose à Chessy',
     description: "Service local de semi-permanent, dépose et manucure à Chessy, Val d'Europe et Marne la Vallée, avec déplacement jusqu'à 15 km.",
