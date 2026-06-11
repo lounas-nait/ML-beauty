@@ -337,7 +337,7 @@ export default function Contact() {
               },
               {
                 q: "Quels sont vos tarifs ?",
-                a: "Semi-permanent : 20€ | Dépose : 10€ | Dépose + nouvelle pose : 25€ (au lieu de 30€)."
+                a: "Semi-permanent : 20€ | Dépose : 15€ | Dépose + nouvelle pose : 30€ (au lieu de 35€)."
               },
               {
                 q: "Où se déroulent les rendez-vous ?",

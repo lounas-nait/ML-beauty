@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import BookingModal from '../../components/BookingModal';
 import ReserveButton from '../../components/ReserveButton';
+import { Hand, Sparkles, LucideBrush } from "lucide-react";
 
 export default function Services() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -10,15 +11,23 @@ export default function Services() {
 
     {
       id: 1,
-      icon: '💅',
-      title: 'Semi-Permanent',
+      icon: <Hand />,
+      title: 'Semi-Permanent main',
       description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
-      features: ['Durée : 2-3 semaines', 'Finition brillante impeccable'],
+      features: ['Durée : 2-3 semaines', 'Finition brillante impeccable', 'Résultat naturel et élégant'],
       price: '20€',
     },
     {
       id: 2,
-      icon: '✨',
+      icon: <LucideBrush />,
+      title: 'Semi-Permanent pied',
+      description: 'Pose semi-permanente longue tenue pour des pieds élégants et soignés.',
+      features: ['Durée : 2-3 semaines', 'Finition brillante impeccable', 'Résultat naturel et élégant'],
+      price: '30€',
+    },
+    {
+      id: 3,
+      icon: <Sparkles />,
       title: 'Dépose Semi-Permanent',
       description: 'Retrait professionnel du vernis semi-permanent en douceur, sans abîmer l’ongle naturel',
       features: [
@@ -26,8 +35,9 @@ export default function Services() {
         'Respect total de l’ongle naturel',
         'Nettoyage et finition soignée'
       ],
-      price: 'À partir de 5€',
+      price: 'À partir de 10€',
     },
+    
     /*
     {
       id: 3,

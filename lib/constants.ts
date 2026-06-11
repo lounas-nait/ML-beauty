@@ -103,7 +103,7 @@ export const SERVICES = [
       'Protection de l’ongle naturel',
       'Finition propre et nette',
     ],
-    price: 'À partir de 5€',
+    price: 'À partir de 10€',
   },
 ];
 
@@ -133,7 +133,7 @@ export const TESTIMONIALS = [
 export const FAQ = [
   {
     q: 'Quel est le prix des prestations ?',
-    a: 'Les tarifs dépendent de la prestation. La pose gel commence à partir de 20€, le semi-permanent à 35€. Les tarifs exacts seront affichés lors de votre rendez-vous.',
+    a: 'Les tarifs dépendent de la prestation. La pose gel commence à partir de 20€, le semi-permanent à 20€. Les tarifs exacts seront affichés lors de votre rendez-vous.',
   },
   {
     q: 'Proposez-vous des réductions pour les clients réguliers ?',

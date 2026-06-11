@@ -9,6 +9,7 @@ import ReviewCard from '../components/ReviewCard';
 import { realisations } from '../lib/realisations';
 import BookingModal from '../components/BookingModal';
 import ReserveButton from '../components/ReserveButton';
+import { Sparkles, LucideBrush} from "lucide-react";
 
 const heroSlides = [
   {
@@ -264,16 +265,16 @@ export default function Home() {
 
             {[
               {
-                icon: '💅',
+                icon: <LucideBrush/>,
                 title: 'Semi-Permanent',
                 description: 'Vernis semi-permanent 2-3 semaines',
                 price: '20€',
               },
               {
-                icon: '✨',
+                icon: <Sparkles />,
                 title: 'Dépose Semi-Permanent',
                 description: 'Retrait du vernis semi-permanent en douceur',
-                price: 'à partir de 5€',
+                price: 'à partir de 10€',
               },
 
               /*

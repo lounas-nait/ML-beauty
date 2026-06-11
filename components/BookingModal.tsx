@@ -45,29 +45,45 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
 
     const services: Service[] = [
         {
-            id: 'semi',
-            title: 'Semi-Permanent',
+            id: 'semimain',
+            title: 'Semi-Permanent mains',
             icon: '💅',
             price: '20€',
             cal: 'https://cal.com/mlbeauty-t9m0ee/semi-permanent',
         },
         {
+            id: 'semipied',
+            title: 'Semi-Permanent pieds',
+            icon: '🦶',
+            price: '30€',
+            cal: 'https://cal.com/mlbeauty-t9m0ee/pose-semi-permanent-pieds',
+        },
+        {
             id: 'depose',
             title: 'Dépose',
             icon: '✨',
-            price: '10€',
+            price: '15€',
             cal: 'https://cal.com/mlbeauty-t9m0ee/depose',
+        },
+        {
+            id: 'mainpied',
+            title: 'Semi-Permanent mains + pieds ',
+            icon: '🔥',
+            price: '50€',
+            cal: 'https://cal.com/mlbeauty-t9m0ee/semi-permanent-mains-pieds',
         },
         {
             id: 'combo',
             title: 'Dépose + Semi-Permanent',
             icon: '🔥',
-            oldPrice: '30€',
-            price: '25€',
+            oldPrice: '35€',
+            price: '30€',
             promo: true,
             savings: '5€',
             cal: 'https://cal.com/mlbeauty-t9m0ee/depose-pose',
         },
+        
+
     ];
 
     const selected = services.find((s) => s.id === selectedService);
