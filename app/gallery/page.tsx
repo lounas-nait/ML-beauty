@@ -1,16 +1,22 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookingModal from '../../components/BookingModal';
 import ReserveButton from '../../components/ReserveButton';
-import {realisations}  from '../../lib/realisations';
+import { Realisation } from '../../lib/realisations';
 
 export default function Gallery() {
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [realisations, setRealisations] = useState<Realisation[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
-  
+  useEffect(() => {
+    fetch('/api/realisations')
+      .then((res) => res.json())
+      .then((data: Realisation[]) => setRealisations(data))
+      .catch(() => setRealisations([]));
+  }, []);
 
   const categories = ['Toutes', ...new Set(realisations.map((item) => item.category))];
   const [activeCategory, setActiveCategory] = useState('Toutes');
@@ -19,6 +25,8 @@ export default function Gallery() {
     activeCategory === 'Toutes'
       ? realisations
       : realisations.filter((item) => item.category === activeCategory);
+
+  const selected = realisations.find((item) => item.id === selectedId) || null;
 
   return (
     <>
@@ -68,24 +76,31 @@ export default function Gallery() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {filteredItems.map((item) => (
-              <div
-                key={item.id}
-                className="group relative h-48 md:h-56 rounded-lg overflow-hidden shadow-md hover-lift cursor-pointer bg-gray-200"
-                onClick={() => setSelectedImage(item.id)}
-              >
-                <Image
-                  src={item.images[0]} // Affiche la première image de chaque réalisation
-                  alt={item.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition duration-300"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
-                  <p className="text-white font-semibold text-sm">{item.title}</p>
+            {filteredItems.map((item) => {
+              const cover = item.media.find((m) => m.type === 'IMAGE') ?? item.media[0];
+              return (
+                <div
+                  key={item.id}
+                  className="group relative h-48 md:h-56 rounded-lg overflow-hidden shadow-md hover-lift cursor-pointer bg-gray-200"
+                  onClick={() => setSelectedId(item.id)}
+                >
+                  {cover?.type === 'VIDEO' ? (
+                    <video src={cover.url} className="absolute inset-0 w-full h-full object-cover" muted playsInline />
+                  ) : (
+                    <Image
+                      src={cover?.url || '/profile-icon.svg'}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition duration-300"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                    <p className="text-white font-semibold text-sm">{item.title}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {filteredItems.length === 0 && (
@@ -99,33 +114,34 @@ export default function Gallery() {
       </section>
 
       {/* Lightbox Modal */}
-      {selectedImage && (
+      {selected && (
         <div
           className="fixed inset-0 z-[1200] bg-black/80 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setSelectedId(null)}
         >
           <div
             className="relative w-full max-w-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              onClick={() => setSelectedImage(null)}
+              onClick={() => setSelectedId(null)}
               className="absolute -top-10 right-0 text-white text-3xl font-bold hover:scale-125 transition"
               aria-label="Fermer"
             >
               ✕
             </button>
-            <div className="relative h-96 md:h-[600px] rounded-lg overflow-hidden">
-              <Image
-                src={realisations.find((item) => item.id === selectedImage)?.images[0] || ''}
-                alt="Galerie zoom"
-                fill
-                className="object-cover"
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[80vh] overflow-y-auto">
+              {selected.media.map((m) => (
+                <div key={m.id} className="relative h-72 sm:h-80 rounded-lg overflow-hidden">
+                  {m.type === 'VIDEO' ? (
+                    <video src={m.url} className="absolute inset-0 w-full h-full object-cover" controls playsInline />
+                  ) : (
+                    <Image src={m.url} alt={selected.title} fill className="object-cover" />
+                  )}
+                </div>
+              ))}
             </div>
-            <p className="text-white text-center mt-4 text-sm">
-              {realisations.find((item) => item.id === selectedImage)?.title}
-            </p>
+            <p className="text-white text-center mt-4 text-sm">{selected.title}</p>
           </div>
         </div>
       )}

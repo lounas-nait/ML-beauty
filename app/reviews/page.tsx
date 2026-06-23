@@ -4,28 +4,46 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import ReviewCard, { StarRating } from '@/components/ReviewCard';
-import { reviews, getAverageRating, getTotalReviews, getRatingDistribution } from '@/lib/reviews';
-import { realisations } from '@/lib/realisations';
+import ReviewFormModal from '@/components/ReviewFormModal';
+import { Review, getAverageRating, getTotalReviews, getRatingDistribution } from '@/lib/reviews';
+import { Realisation } from '@/lib/realisations';
 
 export default function ReviewsPage() {
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoScroll, setAutoScroll] = useState(true);
-  const [selectedRealisation, setSelectedRealisation] = useState<number | null>(null);
+  const [realisations, setRealisations] = useState<Realisation[]>([]);
+  const [selectedRealisation, setSelectedRealisation] = useState<string | null>(null);
+  const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
 
-  const averageRating = getAverageRating();
-  const totalReviews = getTotalReviews();
-  const ratingDistribution = getRatingDistribution();
+  useEffect(() => {
+    fetch('/api/reviews')
+      .then((res) => res.json())
+      .then((data: Review[]) => setReviews(data))
+      .catch(() => setReviews([]));
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/realisations')
+      .then((res) => res.json())
+      .then((data: Realisation[]) => setRealisations(data))
+      .catch(() => setRealisations([]));
+  }, []);
+
+  const averageRating = getAverageRating(reviews);
+  const totalReviews = getTotalReviews(reviews);
+  const ratingDistribution = getRatingDistribution(reviews);
 
   // Auto-scroll carousel
   useEffect(() => {
-    if (!autoScroll) return;
+    if (!autoScroll || reviews.length === 0) return;
 
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % reviews.length);
     }, 6000);
 
     return () => clearInterval(timer);
-  }, [autoScroll]);
+  }, [autoScroll, reviews.length]);
 
   const handlePrevSlide = () => {
     setAutoScroll(false);
@@ -55,7 +73,7 @@ export default function ReviewsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-rose-50 via-white to-pink-50">
+      <section className="py-16 px-4 bg-gradient-to-br from-rose-50 via-white to-pink-50">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
@@ -113,157 +131,89 @@ export default function ReviewsPage() {
       </section>
 
       {/* Reviews Carousel Section */}
-      <section className="py-24 px-4 bg-white">
+      <section className="py-16 px-4 bg-white">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">Avis de nos clientes</h2>
           <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto">
             Découvrez les témoignages authentiques de nos clientes satisfaites
           </p>
 
-          {/* Carousel Container */}
-          <div className="relative">
-            {/* Cards */}
-            <div className="relative h-96 md:h-80">
-              {reviews.map((review, index) => (
-                <div
-                  key={review.id}
-                  className={`absolute inset-0 transition-all duration-700 ease-out ${
-                    index === currentSlide
-                      ? 'opacity-100 scale-100 translate-x-0'
-                      : index < currentSlide
-                      ? 'opacity-0 scale-95 translate-x-full'
-                      : 'opacity-0 scale-95 -translate-x-full'
-                  }`}
-                >
-                  <ReviewCard review={review} />
-                </div>
-              ))}
-            </div>
+          {reviews.length === 0 ? (
+            <p className="text-center text-gray-500">Aucun avis publié pour le moment.</p>
+          ) : (
+            <div className="relative">
+              {/* Cards */}
+              <div className="relative h-[300px] sm:h-[280px] overflow-hidden">
+                {reviews.map((review, index) => (
+                  <div
+                    key={review.id}
+                    className={`absolute inset-0 transition-all duration-700 ease-out ${
+                      index === currentSlide
+                        ? 'opacity-100 scale-100 translate-x-0'
+                        : index < currentSlide
+                        ? 'opacity-0 scale-95 translate-x-full'
+                        : 'opacity-0 scale-95 -translate-x-full'
+                    }`}
+                  >
+                    <ReviewCard review={review} />
+                  </div>
+                ))}
+              </div>
 
-            {/* Navigation Buttons */}
-            <button
-              onClick={handlePrevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
-            >
-              <span className="text-2xl group-hover:-translate-x-1 transition">‹</span>
-            </button>
-            <button
-              onClick={handleNextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
-            >
-              <span className="text-2xl group-hover:translate-x-1 transition">›</span>
-            </button>
-
-            {/* Indicators */}
-            <div className="flex justify-center gap-2 mt-8">
-              {reviews.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setAutoScroll(false);
-                    setCurrentSlide(index);
-                  }}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === currentSlide
-                      ? 'bg-rose-500 w-8'
-                      : 'bg-rose-200 w-2 hover:bg-rose-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Réalisations Section */}
-      <section className="py-24 px-4 bg-gray-50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Mes Réalisations</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Cliquez sur une photo pour voir le détail de la réalisation.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {realisations.map((realisation) => (
+              {/* Navigation Buttons */}
               <button
-                key={realisation.id}
-                type="button"
-                onClick={() => setSelectedRealisation(realisation.id)}
-                className="group relative overflow-hidden rounded-3xl shadow-lg border border-gray-200 bg-white"
+                onClick={handlePrevSlide}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
               >
-                <div className="relative h-72 overflow-hidden">
-                  <Image
-                    src={realisation.images[0]}
-                    alt={realisation.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6 text-left">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{realisation.title}</h3>
-                  <p className="text-gray-600">{realisation.category}</p>
-                </div>
+                <span className="text-2xl group-hover:-translate-x-1 transition">‹</span>
               </button>
-            ))}
-          </div>
+              <button
+                onClick={handleNextSlide}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 md:translate-x-0 z-10 bg-white hover:bg-rose-100 text-rose-500 p-3 rounded-full shadow-md hover:shadow-lg transition group"
+              >
+                <span className="text-2xl group-hover:translate-x-1 transition">›</span>
+              </button>
+
+              {/* Indicators */}
+              <div className="flex justify-center gap-2 mt-8">
+                {reviews.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setAutoScroll(false);
+                      setCurrentSlide(index);
+                    }}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentSlide
+                        ? 'bg-rose-500 w-8'
+                        : 'bg-rose-200 w-2 hover:bg-rose-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {selectedRealisation && (
-        <div
-          className="fixed inset-0 z-[1200] bg-black/70 flex items-center justify-center p-4"
-          onClick={() => setSelectedRealisation(null)}
-        >
-          <div
-            className="relative w-full max-w-4xl rounded-3xl overflow-hidden bg-white shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedRealisation(null)}
-              className="absolute top-4 right-4 z-20 bg-white/90 text-gray-900 rounded-full p-3 hover:bg-white"
-              aria-label="Fermer"
-            >
-              ✕
-            </button>
-            <div className="relative h-[70vh] bg-gray-100">
-              <Image
-                src={realisations.find((item) => item.id === selectedRealisation)?.images[0] ?? ''}
-                alt={realisations.find((item) => item.id === selectedRealisation)?.title ?? 'Réalisation'}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-6 text-left">
-              <h3 className="text-3xl font-bold text-gray-900 mb-3">
-                {realisations.find((item) => item.id === selectedRealisation)?.title}
-              </h3>
-              <p className="text-gray-600">
-                {realisations.find((item) => item.id === selectedRealisation)?.category}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      
 
       {/* CTA Section */}
-      <section className="py-24 px-4 bg-gradient-to-r from-rose-500 to-pink-500">
-        <div className="container mx-auto max-w-4xl text-center text-white">
+      <section className="py-16 px-4 bg-gradient-to-r from-rose-500 to-pink-500">
+        <div className="container mx-auto max-w-6xl text-center text-white">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Vous aussi, partagez votre expérience ! 💬</h2>
           <p className="text-lg md:text-xl mb-8 opacity-95">
-            Vos avis nous aident à encore mieux servir nos clientes. Merci de nous laisser un commentaire sur Google, Instagram ou TikTok !
+            Laissez votre avis directement sur le site, ou sur Instagram !
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://www.google.com/maps"
-              target="_blank"
-              rel="noopener noreferrer"
+          <div className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
+            <button
+              onClick={() => setIsReviewFormOpen(true)}
               className="inline-flex items-center justify-center gap-2 bg-white text-rose-500 px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-shadow hover:-translate-y-1"
             >
-              ⭐ Google Avis
-            </a>
+              ✍️ Laisser un avis ici
+            </button>
+            
             <a
               href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
               target="_blank"
@@ -272,24 +222,16 @@ export default function ReviewsPage() {
             >
               📸 Instagram DM
             </a>
-            <a
-              href="https://tiktok.com/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/@mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 bg-white text-rose-500 px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition-shadow hover:-translate-y-1"
-            >
-              🎵 TikTok
-            </a>
           </div>
 
           <div className="mt-12 pt-12 border-t border-white/30">
-            <p className="text-sm opacity-90">Les avis Google aident davantage le référencement local de notre salon. Merci 🙏</p>
+            <p className="text-sm opacity-90">Vos avis aident davantage le référencement local de notre salon. Merci 🙏</p>
           </div>
         </div>
       </section>
 
       {/* Breadcrumb Navigation */}
-      <section className="py-6 px-4 bg-white border-t border-gray-200">
+      <section className="py-16 px-4 bg-white border-t border-gray-200">
         <div className="container mx-auto max-w-6xl">
           <nav className="flex items-center gap-2 text-sm text-gray-600">
             <Link href="/" className="hover:text-rose-500 transition">
@@ -300,6 +242,8 @@ export default function ReviewsPage() {
           </nav>
         </div>
       </section>
+
+      <ReviewFormModal isOpen={isReviewFormOpen} onClose={() => setIsReviewFormOpen(false)} />
     </>
   );
 }

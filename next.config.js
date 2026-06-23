@@ -1,23 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
       },
     ],
   },
 };
 
-module.exports = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-   
-  images: {
-    domains: ['images.unsplash.com'],
-  
-}
-}
+module.exports = nextConfig;

@@ -107,28 +107,6 @@ export const SERVICES = [
   },
 ];
 
-// Testimonials
-export const TESTIMONIALS = [
-  {
-    id: 1,
-    name: 'Sophie M.',
-    text: 'Service impeccable, très professionnelle ! Les ongles sont magnifiques et durent longtemps.',
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: 'Clara B.',
-    text: 'J\'adore le confort de ne pas sortir de chez moi. Les prestations sont toujours de qualité.',
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: 'Léa D.',
-    text: 'Créative et à l\'écoute de mes envies. Je recommande vivement !',
-    rating: 5,
-  },
-];
-
 // FAQ
 export const FAQ = [
   {

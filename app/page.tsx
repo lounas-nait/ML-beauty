@@ -4,9 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { SERVICES } from '../lib/constants';
-import { reviews, getAverageRating } from '../lib/reviews';
+import { Review, getAverageRating } from '../lib/reviews';
 import ReviewCard from '../components/ReviewCard';
-import { realisations } from '../lib/realisations';
+import { Realisation } from '../lib/realisations';
 import BookingModal from '../components/BookingModal';
 import ReserveButton from '../components/ReserveButton';
 import { Sparkles, LucideBrush} from "lucide-react";
@@ -46,11 +46,30 @@ export default function Home() {
   };
 
 
-  const homeReviews = reviews.slice(0, 4);
-  const averageRating = getAverageRating();
+  const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewSlide, setReviewSlide] = useState(0);
 
   useEffect(() => {
+    fetch('/api/reviews')
+      .then((res) => res.json())
+      .then((data: Review[]) => setReviews(data))
+      .catch(() => setReviews([]));
+  }, []);
+
+  const homeReviews = reviews.slice(0, 4);
+  const averageRating = getAverageRating(homeReviews);
+
+  const [realisations, setRealisations] = useState<Realisation[]>([]);
+
+  useEffect(() => {
+    fetch('/api/realisations')
+      .then((res) => res.json())
+      .then((data: Realisation[]) => setRealisations(data))
+      .catch(() => setRealisations([]));
+  }, []);
+
+  useEffect(() => {
+    if (homeReviews.length === 0) return;
     const timer = setInterval(() => {
       setReviewSlide((prev) => (prev + 1) % homeReviews.length);
     }, 7000);
@@ -171,67 +190,71 @@ export default function Home() {
       <section className="py-16 px-4 bg-gradient-to-br from-rose-50 via-white to-pink-50 overflow-x-hidden">
         <div className="container mx-auto max-w-6xl">
 
-          {/* Rating */}
-          <div className="flex flex-col items-center gap-4 mb-10">
-            <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-full bg-white/90 px-4 sm:px-6 py-3 shadow-sm border border-rose-100 text-center">
-              <span className="text-3xl sm:text-5xl font-bold text-rose-500">
-                {averageRating}
-              </span>
-              <span className="text-sm text-gray-500">/5</span>
-              <span className="text-yellow-400 text-xl sm:text-2xl">⭐⭐⭐⭐⭐</span>
-              <span className="text-xs sm:text-sm text-gray-500">
-                ({homeReviews.length} avis sélectionnés)
-              </span>
-            </div>
-          </div>
-
-          {/* Slider */}
-          <div className="relative">
-
-            <div className="relative h-[360px] sm:h-[420px] overflow-hidden">
-
-              {homeReviews.map((review, index) => (
-                <div
-                  key={review.id}
-                  className={`absolute inset-0 transition-all duration-700 ease-out ${index === reviewSlide
-                    ? 'opacity-100 translate-x-0 scale-100'
-                    : 'opacity-0 scale-95'
-                    }`}
-                >
-                  <ReviewCard review={review} className="min-h-[300px]" />
+          {homeReviews.length > 0 && (
+            <>
+              {/* Rating */}
+              <div className="flex flex-col items-center gap-4 mb-10">
+                <div className="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 rounded-full bg-white/90 px-4 sm:px-6 py-3 shadow-sm border border-rose-100 text-center">
+                  <span className="text-3xl sm:text-5xl font-bold text-rose-500">
+                    {averageRating}
+                  </span>
+                  <span className="text-sm text-gray-500">/5</span>
+                  <span className="text-yellow-400 text-xl sm:text-2xl">⭐⭐⭐⭐⭐</span>
+                  <span className="text-xs sm:text-sm text-gray-500">
+                    ({homeReviews.length} avis sélectionnés)
+                  </span>
                 </div>
-              ))}
+              </div>
 
-            </div>
+              {/* Slider */}
+              <div className="relative">
 
-            {/* Buttons NAV - FIX MOBILE SAFE */}
-            <button
-              onClick={prevReview}
-              className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-rose-100 text-rose-500 p-2 sm:p-3 rounded-full shadow-md transition"
-            >
-              <span className="text-xl sm:text-2xl">‹</span>
-            </button>
+                <div className="relative h-[300px] sm:h-[280px] overflow-hidden">
 
-            <button
-              onClick={nextReview}
-              className="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-rose-100 text-rose-500 p-2 sm:p-3 rounded-full shadow-md transition"
-            >
-              <span className="text-xl sm:text-2xl">›</span>
-            </button>
+                  {homeReviews.map((review, index) => (
+                    <div
+                      key={review.id}
+                      className={`absolute inset-0 transition-all duration-700 ease-out ${index === reviewSlide
+                        ? 'opacity-100 translate-x-0 scale-100'
+                        : 'opacity-0 scale-95'
+                        }`}
+                    >
+                      <ReviewCard review={review} className="min-h-[300px]" />
+                    </div>
+                  ))}
 
-          </div>
+                </div>
 
-          {/* Indicators */}
-          <div className="flex justify-center gap-2 mt-8 flex-wrap">
-            {homeReviews.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setReviewSlide(index)}
-                className={`h-2 rounded-full transition-all duration-300 ${index === reviewSlide ? 'bg-rose-500 w-6 sm:w-8' : 'bg-rose-200 w-2'
-                  }`}
-              />
-            ))}
-          </div>
+                {/* Buttons NAV - FIX MOBILE SAFE */}
+                <button
+                  onClick={prevReview}
+                  className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-rose-100 text-rose-500 p-2 sm:p-3 rounded-full shadow-md transition"
+                >
+                  <span className="text-xl sm:text-2xl">‹</span>
+                </button>
+
+                <button
+                  onClick={nextReview}
+                  className="absolute right-2 sm:right-0 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-rose-100 text-rose-500 p-2 sm:p-3 rounded-full shadow-md transition"
+                >
+                  <span className="text-xl sm:text-2xl">›</span>
+                </button>
+
+              </div>
+
+              {/* Indicators */}
+              <div className="flex justify-center gap-2 mt-8 flex-wrap">
+                {homeReviews.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setReviewSlide(index)}
+                    className={`h-2 rounded-full transition-all duration-300 ${index === reviewSlide ? 'bg-rose-500 w-6 sm:w-8' : 'bg-rose-200 w-2'
+                      }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
 
           {/* CTA */}
           <div className="text-center mt-12">
@@ -342,31 +365,38 @@ export default function Home() {
 
 
             // ⚠️ hook ici OK (dans composant, pas dans map)
-            const [selectedRealisation, setSelectedRealisation] = useState<any>(null);
+            const [selectedRealisation, setSelectedRealisation] = useState<Realisation | null>(null);
 
             return (
               <>
                 {/* GRID */}
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                  {realisations.map((real) => (
-                    <div
-                      key={real.id}
-                      onClick={() => setSelectedRealisation(real)}
-                      className="relative aspect-square rounded-2xl overflow-hidden shadow-md cursor-pointer group"
-                    >
-                      <Image
-                        src={real.images[0]}
-                        alt={real.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
-                        <span className="text-white font-bold text-sm sm:text-lg">
-                          Voir
-                        </span>
+                  {realisations.map((real) => {
+                    const cover = real.media.find((m) => m.type === 'IMAGE') ?? real.media[0];
+                    return (
+                      <div
+                        key={real.id}
+                        onClick={() => setSelectedRealisation(real)}
+                        className="relative aspect-square rounded-2xl overflow-hidden shadow-md cursor-pointer group"
+                      >
+                        {cover?.type === 'VIDEO' ? (
+                          <video src={cover.url} className="absolute inset-0 w-full h-full object-cover" muted playsInline />
+                        ) : (
+                          <Image
+                            src={cover?.url || '/profile-icon.svg'}
+                            alt={real.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition duration-300"
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                          <span className="text-white font-bold text-sm sm:text-lg">
+                            Voir
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 {/* MODAL RESPONSIVE */}
@@ -388,19 +418,23 @@ export default function Home() {
                         {selectedRealisation.title}
                       </h3>
 
-                      {/* IMAGES GRID */}
+                      {/* MEDIA GRID */}
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                        {selectedRealisation.images.map((img: string, index: number) => (
+                        {selectedRealisation.media.map((m) => (
                           <div
-                            key={index}
+                            key={m.id}
                             className="relative w-full aspect-square sm:aspect-[4/5] rounded-xl overflow-hidden"
                           >
-                            <Image
-                              src={img}
-                              alt={`Image ${index + 1}`}
-                              fill
-                              className="object-cover"
-                            />
+                            {m.type === 'VIDEO' ? (
+                              <video src={m.url} className="absolute inset-0 w-full h-full object-cover" controls playsInline />
+                            ) : (
+                              <Image
+                                src={m.url}
+                                alt={selectedRealisation.title}
+                                fill
+                                className="object-cover"
+                              />
+                            )}
                           </div>
                         ))}
                       </div>

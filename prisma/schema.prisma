@@ -1,0 +1,89 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  phone     String?
+  email     String?
+  instagram String?
+  address   String?
+  updatedAt DateTime
+}
+
+model Prestation {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  price       Float
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
+
+enum ReviewPlatform {
+  GOOGLE
+  INSTAGRAM
+  TIKTOK
+  DIRECT
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ReviewSource {
+  CLIENT
+  ADMIN
+}
+
+model Review {
+  id            String         @id @default(cuid())
+  name          String
+  rating        Int
+  comment       String?
+  screenshotUrl String?
+  platform      ReviewPlatform @default(DIRECT)
+  status        ReviewStatus   @default(PENDING)
+  source        ReviewSource   @default(CLIENT)
+  image         String?
+  createdAt     DateTime       @default(now())
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+model Realisation {
+  id        String             @id @default(cuid())
+  title     String
+  category  String
+  media     RealisationMedia[]
+  createdAt DateTime           @default(now())
+}
+
+model RealisationMedia {
+  id            String      @id @default(cuid())
+  realisationId String
+  realisation   Realisation @relation(fields: [realisationId], references: [id], onDelete: Cascade)
+  url           String
+  type          MediaType   @default(IMAGE)
+  order         Int         @default(0)
+  createdAt     DateTime    @default(now())
+}

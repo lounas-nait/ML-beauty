@@ -1,99 +1,15 @@
-export const realisations = 
-[
-        {
-          id: 1,
-          title: "Semi-permanent rouge",
-          category: "Rouge",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/P11.jpg',
-            '/images/realisattions/P1.jpg',
-            '/images/realisattions/P111.jpg',
-          ],
-        },
-        {
-          id: 2,
-          title: "Semi-permanent violet",
-          category: "Violet",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/P2.jpg',
-            '/images/realisattions/P22.jpg',
-            '/images/realisattions/P222.jpg',
-          ],
-        },
-        {
-          id: 3,
-          title: "Semi-permanent Nude",
-          category: "Nude",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/33.jpg',
-            '/images/realisattions/3.jpg',
-            '/images/realisattions/333.jpg',
-            '/images/realisattions/3333.jpg',
-          ],
-        },
-        {
-          id: 4,
-          title: "Semi-permanent Nude",
-          category: "Nude",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/44.jpg',           
-          ],
-        },
-        {
-          id: 5,
-          title: "Semi-permanent Nude",
-          category: "Nude",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/55.jpg',           
-          ],
-        },
-        {
-          id: 6,
-          title: "Semi-permanent Prune",
-          category: "Prune",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/6666.jpg',
-            '/images/realisattions/666.png',
-            '/images/realisattions/66.png',
-            
-            
-          ],
-        },
-        {
-          id: 7,
-          title: "Semi-permanent Bleu pastel",
-          category: "bleu",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/99.jpg',
-            '/images/realisattions/999.jpg',             
-          ],
-        },
-        {
-          id: 8,
-          title: "Semi-permanent Nude",
-          category: "Nude",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/77.png',
-                        
-          ],
-        },
-        {
-          id: 9,
-          title: "Semi-permanent Nude",
-          category: "Nude",
-          platform: 'Instagram',
-          images: [
-            '/images/realisattions/88.png',
-                        
-          ],
-        },
-        
-      ];
+export interface RealisationMedia {
+  id: string;
+  url: string;
+  type: 'IMAGE' | 'VIDEO';
+}
+
+export interface Realisation {
+  id: string;
+  title: string;
+  category: string;
+  media: RealisationMedia[];
+}
+
+export const MAX_PHOTOS_PER_REALISATION = 3;
+export const MAX_VIDEOS_PER_REALISATION = 1;
