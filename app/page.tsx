@@ -377,7 +377,7 @@ export default function Home() {
                       <div
                         key={real.id}
                         onClick={() => setSelectedRealisation(real)}
-                        className="relative aspect-square rounded-2xl overflow-hidden shadow-md cursor-pointer group"
+                        className="relative aspect-square rounded-2xl overflow-hidden shadow-md cursor-pointer group bg-gray-100"
                       >
                         {cover?.type === 'VIDEO' ? (
                           <video src={cover.url} className="absolute inset-0 w-full h-full object-cover" muted playsInline />
@@ -423,7 +423,7 @@ export default function Home() {
                         {selectedRealisation.media.map((m) => (
                           <div
                             key={m.id}
-                            className="relative w-full aspect-square sm:aspect-[4/5] rounded-xl overflow-hidden"
+                            className="relative w-full aspect-square sm:aspect-[4/5] rounded-xl overflow-hidden bg-gray-100"
                           >
                             {m.type === 'VIDEO' ? (
                               <video src={m.url} className="absolute inset-0 w-full h-full object-cover" controls playsInline />
@@ -432,7 +432,7 @@ export default function Home() {
                                 src={m.url}
                                 alt={selectedRealisation.title}
                                 fill
-                                className="object-cover"
+                                className="object-contain"
                               />
                             )}
                           </div>

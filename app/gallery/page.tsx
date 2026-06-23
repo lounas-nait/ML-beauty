@@ -132,11 +132,11 @@ export default function Gallery() {
             </button>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[80vh] overflow-y-auto">
               {selected.media.map((m) => (
-                <div key={m.id} className="relative h-72 sm:h-80 rounded-lg overflow-hidden">
+                <div key={m.id} className="relative h-72 sm:h-80 rounded-lg overflow-hidden bg-gray-900">
                   {m.type === 'VIDEO' ? (
                     <video src={m.url} className="absolute inset-0 w-full h-full object-cover" controls playsInline />
                   ) : (
-                    <Image src={m.url} alt={selected.title} fill className="object-cover" />
+                    <Image src={m.url} alt={selected.title} fill className="object-contain" />
                   )}
                 </div>
               ))}

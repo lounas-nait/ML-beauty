@@ -5,13 +5,11 @@ import Link from 'next/link';
 import ReviewCard, { StarRating } from '@/components/ReviewCard';
 import ReviewFormModal from '@/components/ReviewFormModal';
 import { Review, getAverageRating, getTotalReviews, getRatingDistribution } from '@/lib/reviews';
-import { Realisation } from '@/lib/realisations';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoScroll, setAutoScroll] = useState(true);
-  const [realisations, setRealisations] = useState<Realisation[]>([]);
   const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
 
   useEffect(() => {
@@ -19,13 +17,6 @@ export default function ReviewsPage() {
       .then((res) => res.json())
       .then((data: Review[]) => setReviews(data))
       .catch(() => setReviews([]));
-  }, []);
-
-  useEffect(() => {
-    fetch('/api/realisations')
-      .then((res) => res.json())
-      .then((data: Realisation[]) => setRealisations(data))
-      .catch(() => setRealisations([]));
   }, []);
 
   const averageRating = getAverageRating(reviews);
