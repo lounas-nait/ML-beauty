@@ -12,7 +12,6 @@ export default function ReviewsPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [autoScroll, setAutoScroll] = useState(true);
   const [realisations, setRealisations] = useState<Realisation[]>([]);
-  const [selectedRealisation, setSelectedRealisation] = useState<string | null>(null);
   const [isReviewFormOpen, setIsReviewFormOpen] = useState(false);
 
   useEffect(() => {
