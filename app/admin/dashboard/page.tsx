@@ -153,7 +153,10 @@ export default function AdminDashboardPage() {
       <div className="container mx-auto max-w-5xl">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Modération des avis</h1>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
+            <Link href="/admin/dashboard/prestations" className="text-sm text-gray-600 hover:text-rose-500 underline">
+              Prestations →
+            </Link>
             <Link href="/admin/dashboard/realisations" className="text-sm text-gray-600 hover:text-rose-500 underline">
               Réalisations & Galerie →
             </Link>
