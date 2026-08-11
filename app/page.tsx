@@ -3,31 +3,70 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { SERVICES } from '../lib/constants';
+import { Prestation } from '@/lib/types';
 import { Review, getAverageRating } from '../lib/reviews';
 import ReviewCard from '../components/ReviewCard';
 import { Realisation } from '../lib/realisations';
 import BookingModal from '../components/BookingModal';
 import ReserveButton from '../components/ReserveButton';
-import { Sparkles, LucideBrush} from "lucide-react";
 
-const heroSlides = [
+const DEFAULT_HERO_SLIDES: Array<{ id: number; image: string; service: Prestation }> = [
   {
     id: 1,
     image: '/images/realisattions/33.jpg',
-    service: SERVICES[1], // semi-permanent
+    service: {
+      id: 0,
+      title: 'Semi-Permanent mains',
+      description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
+      price: 20,
+      priceLabel: '€',
+      icon: '💅',
+      bookingUrl: '',
+      imageUrl: '',
+      isPromo: false,
+      promoPrice: null,
+      promoLabel: null,
+      createdAt: '',
+      updatedAt: '',
+    },
   },
   {
     id: 2,
     image: '/images/realisattions/P11.jpg',
-    service: SERVICES[6], // Semi-Permanent
+    service: {
+      id: 1,
+      title: 'Dépose Semi-Permanent',
+      description: 'Retrait du vernis semi-permanent en douceur',
+      price: 10,
+      priceLabel: 'À partir de',
+      icon: '✨',
+      bookingUrl: '',
+      imageUrl: '',
+      isPromo: false,
+      promoPrice: null,
+      promoLabel: null,
+      createdAt: '',
+      updatedAt: '',
+    },
   },
-
 ];
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [prestations, setPrestations] = useState<Prestation[]>([]);
+
+  const heroSlides = prestations.length > 0
+    ? prestations.slice(0, 2).map((service, index) => ({
+        id: service.id,
+        image: service.imageUrl || (index === 0 ? '/images/realisattions/33.jpg' : '/images/realisattions/P11.jpg'),
+        service,
+      }))
+    : DEFAULT_HERO_SLIDES;
+
+  const previewServices = prestations.length > 0
+    ? prestations.slice(0, 2)
+    : DEFAULT_HERO_SLIDES.map((slide) => slide.service);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -35,7 +74,7 @@ export default function Home() {
     }, 6000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, []);
+  }, [heroSlides.length]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -60,6 +99,13 @@ export default function Home() {
   const averageRating = getAverageRating(homeReviews);
 
   const [realisations, setRealisations] = useState<Realisation[]>([]);
+
+  useEffect(() => {
+    fetch('/api/prestations')
+      .then((res) => res.json())
+      .then((data: Prestation[]) => setPrestations(data))
+      .catch(() => setPrestations([]));
+  }, []);
 
   useEffect(() => {
     fetch('/api/realisations')
@@ -123,17 +169,21 @@ export default function Home() {
                     {slide.service.description}
                   </p>
 
-                  <ul className="space-y-2 mb-6">
-                    {slide.service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center">
-                        <span className="text-rose-400 mr-2">✓</span>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
+                  {slide.service.features && slide.service.features.length > 0 && (
+                    <ul className="space-y-2 mb-6">
+                      {slide.service.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-center">
+                          <span className="text-rose-400 mr-2">✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
 
                   <div className="text-3xl font-bold text-rose-400 mb-8">
-                    {slide.service.price}
+                    {slide.service.priceLabel
+                      ? `${slide.service.priceLabel} ${slide.service.price}€`
+                      : `${slide.service.price}€`}
                   </div>
 
                   <div className="flex flex-col sm:flex-row gap-4">
@@ -286,52 +336,32 @@ export default function Home() {
           {/* GRID SERVICES */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6 md:gap-8">
 
-            {[
-              {
-                icon: <LucideBrush/>,
-                title: 'Semi-Permanent',
-                description: 'Vernis semi-permanent 2-3 semaines',
-                price: '20€',
-              },
-              {
-                icon: <Sparkles />,
-                title: 'Dépose Semi-Permanent',
-                description: 'Retrait du vernis semi-permanent en douceur',
-                price: 'à partir de 10€',
-              },
+            {previewServices.map((service) => {
+              const priceText = service.priceLabel
+                ? `${service.priceLabel} ${service.price}€`
+                : `${service.price}€`;
 
-              /*
-              {
-                icon: '🎨',
-                title: 'Nail Art',
-                description: 'Designs personnalisés et créatifs',
-              },
-              {
-                icon: '👑',
-                title: 'Stylage Ongles',
-                description: 'Mise en forme et traitement des ongles naturels',
-              },
-              */
-            ].map((service) => (
-              <div
-                key={service.title}
-                className="p-8 rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 hover:shadow-xl transition text-center"
-              >
-                <div className="text-5xl mb-5">{service.icon}</div>
+              return (
+                <div
+                  key={typeof service.id === 'number' ? service.id : service.title}
+                  className="p-8 rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 border border-rose-100 hover:shadow-xl transition text-center"
+                >
+                  <div className="text-5xl mb-5">{service.icon || '💅'}</div>
 
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
-                  {service.title}
-                </h3>
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
+                    {service.title}
+                  </h3>
 
-                <div className="text-2xl font-bold text-rose-500 mb-3">
-                  {service.price}
+                  <div className="text-2xl font-bold text-rose-500 mb-3">
+                    {priceText}
+                  </div>
+
+                  <p className="text-gray-600 text-sm md:text-base">
+                    {service.description}
+                  </p>
                 </div>
-
-                <p className="text-gray-600 text-sm md:text-base">
-                  {service.description}
-                </p>
-              </div>
-            ))}
+              );
+            })}
 
           </div>
 

@@ -1,25 +1,17 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { Prestation } from '@/lib/types';
 
 interface BookingModalProps {
     isOpen: boolean;
     onClose: () => void;
 }
 
-interface Service {
-    id: string;
-    title: string;
-    icon: string;
-    price: string;
-    cal: string;
-    oldPrice?: string;
-    promo?: boolean;
-    savings?: string;
-}
-
 export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
-    const [selectedService, setSelectedService] = useState<string | null>(null);
+    const [selectedService, setSelectedService] = useState<number | null>(null);
+    const [services, setServices] = useState<Prestation[]>([]);
+    const [loading, setLoading] = useState(false);
 
     const trackReservationChoice = (eventName: string) => {
         if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -28,12 +20,14 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             });
         }
     };
+
     // 🔒 Bloque le scroll quand modal ouvert
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
+            setSelectedService(null);
         }
 
         return () => {
@@ -41,50 +35,18 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         };
     }, [isOpen]);
 
+    useEffect(() => {
+        if (!isOpen || services.length > 0) return;
+
+        setLoading(true);
+        fetch('/api/prestations')
+            .then((res) => res.json())
+            .then((data: Prestation[]) => setServices(data))
+            .catch(() => setServices([]))
+            .finally(() => setLoading(false));
+    }, [isOpen, services.length]);
+
     if (!isOpen) return null;
-
-    const services: Service[] = [
-        {
-            id: 'semimain',
-            title: 'Semi-Permanent mains',
-            icon: '💅',
-            price: '20€',
-            cal: 'https://cal.com/mlbeauty-t9m0ee/semi-permanent',
-        },
-        {
-            id: 'semipied',
-            title: 'Semi-Permanent pieds',
-            icon: '🦶',
-            price: '30€',
-            cal: 'https://cal.com/mlbeauty-t9m0ee/pose-semi-permanent-pieds',
-        },
-        {
-            id: 'depose',
-            title: 'Dépose',
-            icon: '✨',
-            price: '15€',
-            cal: 'https://cal.com/mlbeauty-t9m0ee/depose',
-        },
-        {
-            id: 'mainpied',
-            title: 'Semi-Permanent mains + pieds ',
-            icon: '🔥',
-            price: '50€',
-            cal: 'https://cal.com/mlbeauty-t9m0ee/semi-permanent-mains-pieds',
-        },
-        {
-            id: 'combo',
-            title: 'Dépose + Semi-Permanent',
-            icon: '🔥',
-            oldPrice: '35€',
-            price: '30€',
-            promo: true,
-            savings: '5€',
-            cal: 'https://cal.com/mlbeauty-t9m0ee/depose-pose',
-        },
-        
-
-    ];
 
     const selected = services.find((s) => s.id === selectedService);
 
@@ -121,41 +83,53 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                             Choisissez votre prestation :
                         </p>
 
-                        <div className="space-y-4">
-                            {services.map((service) => (
-                                <button
-                                    key={service.id}
-                                    onClick={() => setSelectedService(service.id)}
-                                    className={`w-full p-4 rounded-xl border text-left transition relative
-                    ${service.promo
-                                            ? 'border-rose-400 bg-rose-50 hover:bg-rose-100'
-                                            : 'hover:bg-gray-50'
+                        {loading ? (
+                            <div className="text-center text-gray-500 py-12">Chargement des prestations...</div>
+                        ) : services.length === 0 ? (
+                            <div className="text-center text-gray-500 py-12">
+                                Aucune prestation disponible pour le moment.
+                            </div>
+                        ) : (
+                            <div className="space-y-4">
+                                {services.map((service) => (
+                                    <button
+                                        key={service.id}
+                                        onClick={() => setSelectedService(service.id)}
+                                        className={`w-full p-4 rounded-xl border text-left transition relative ${
+                                            service.isPromo
+                                                ? 'border-rose-400 bg-rose-50 hover:bg-rose-100'
+                                                : 'hover:bg-gray-50'
                                         }`}
-                                >
-
-
-                                    <div className="flex justify-between items-center">
-                                        <div>
-                                            <span className="text-xl mr-2">{service.icon}</span>
-                                            <span className="font-semibold text-gray-800">
-                                                {service.title}
-                                            </span>
-                                        </div>
-
-                                        <div className="flex  font-semibold text-gray-800 items-center gap-2">
-                                            {service.oldPrice && (
-                                                <span className="text-xl text-gray-400 line-through decoration-gray-400">
-                                                    {service.oldPrice}
+                                    >
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <span className="text-xl mr-2">{service.icon || '💅'}</span>
+                                                <span className="font-semibold text-gray-800">
+                                                    {service.title}
                                                 </span>
-                                            )}
-                                            <span className="text-xl font-bold text-rose-600">
-                                                {service.price}
-                                            </span>
+                                            </div>
+
+                                            <div className="flex font-semibold text-gray-800 items-center gap-2">
+                                                {service.isPromo && service.promoPrice != null && (
+                                                    <span className="text-xl text-gray-400 line-through decoration-gray-400">
+                                                        {service.priceLabel ? `${service.priceLabel} ${service.price}€` : `${service.price}€`}
+                                                    </span>
+                                                )}
+                                                <span className="text-xl font-bold text-rose-600">
+                                                    {service.isPromo && service.promoPrice != null
+                                                        ? service.promoLabel
+                                                            ? `${service.promoLabel} ${service.promoPrice}€`
+                                                            : `${service.promoPrice}€`
+                                                        : service.priceLabel
+                                                        ? `${service.priceLabel} ${service.price}€`
+                                                        : `${service.price}€`}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </button>
-                            ))}
-                        </div>
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </>
                 ) : (
                     <>
@@ -164,18 +138,20 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
                         </p>
 
                         <div className="space-y-4">
-                            <a
-                                href={selected?.cal}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                onClick={() => trackReservationChoice('reservation_choice_online')}
-                                className="block w-full text-center p-4 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold hover:shadow-lg transition"
-                            >
-                                📅 Réserver en ligne
-                            </a>
+                            {selected?.bookingUrl && (
+                                <a
+                                    href={selected.bookingUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => trackReservationChoice('reservation_choice_online')}
+                                    className="block w-full text-center p-4 rounded-xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold hover:shadow-lg transition"
+                                >
+                                    📅 Réserver en ligne
+                                </a>
+                            )}
 
                             <a
-                                href="https://www.instagram.com/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg==/mlbeauty_77?igsh=MW5oYXpiOXBneDdrYg=="
+                                href="https://www.instagram.com/mlbeauty_77"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => trackReservationChoice('reservation_choice_instagram')}

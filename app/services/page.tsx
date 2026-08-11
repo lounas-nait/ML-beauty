@@ -1,86 +1,73 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BookingModal from '../../components/BookingModal';
 import ReserveButton from '../../components/ReserveButton';
-import { Hand, Sparkles, LucideBrush } from "lucide-react";
+import { Prestation } from '@/lib/types';
 
 export default function Services() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const services = [
+  const [services, setServices] = useState<Prestation[]>([]);
 
+  useEffect(() => {
+    fetch('/api/prestations')
+      .then((res) => res.json())
+      .then((data: Prestation[]) => setServices(data))
+      .catch(() => setServices([]));
+  }, []);
+
+  const fallbackServices: Prestation[] = [
     {
       id: 1,
-      icon: <Hand />,
+      icon: '💅',
       title: 'Semi-Permanent main',
       description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
+      price: 20,
+      priceLabel: null,
+      bookingUrl: '',
+      imageUrl: '',
+      isPromo: false,
+      promoPrice: null,
+      promoLabel: null,
       features: ['Durée : 2-3 semaines', 'Finition brillante impeccable', 'Résultat naturel et élégant'],
-      price: '20€',
+      createdAt: '',
+      updatedAt: '',
     },
     {
       id: 2,
-      icon: <LucideBrush />,
+      icon: '🦶',
       title: 'Semi-Permanent pied',
       description: 'Pose semi-permanente longue tenue pour des pieds élégants et soignés.',
+      price: 30,
+      priceLabel: null,
+      bookingUrl: '',
+      imageUrl: '',
+      isPromo: false,
+      promoPrice: null,
+      promoLabel: null,
       features: ['Durée : 2-3 semaines', 'Finition brillante impeccable', 'Résultat naturel et élégant'],
-      price: '30€',
+      createdAt: '',
+      updatedAt: '',
     },
-    {
-      id: 3,
-      icon: <Sparkles />,
-      title: 'Dépose Semi-Permanent',
-      description: 'Retrait professionnel du vernis semi-permanent en douceur, sans abîmer l’ongle naturel',
-      features: [
-        'Méthode sécurisée et contrôlée',
-        'Respect total de l’ongle naturel',
-        'Nettoyage et finition soignée'
-      ],
-      price: 'À partir de 10€',
-    },
-    
-    /*
     {
       id: 3,
       icon: '✨',
-      title: 'Pose Gel Premium',
-      description: 'Ongles gel ultra-longs et résistants avec finition brillante',
-      features: ['Durée : 3-4 semaines', 'Vernis brillant ou mat', 'Renforcement des ongles naturels'],
-      price: 'À partir de 45€',
+      title: 'Dépose Semi-Permanent',
+      description: 'Retrait professionnel du vernis semi-permanent en douceur, sans abîmer l’ongle naturel',
+      price: 10,
+      priceLabel: 'À partir de',
+      bookingUrl: '',
+      imageUrl: '',
+      isPromo: false,
+      promoPrice: null,
+      promoLabel: null,
+      features: ['Retrait sécurisé', "Protection de l'ongle naturel", 'Finition propre et nette'],
+      createdAt: '',
+      updatedAt: '',
     },
-    {
-      id: 4,
-      icon: '🎨',
-      title: 'Nail Art Personnalisé',
-      description: 'Designs créatifs et originaux adaptés à vos envies',
-      features: ['Designs uniques', 'Motifs variés', 'Strass et paillettes disponibles'],
-      price: 'À partir de 50€',
-    },
-    {
-      id: 5,
-      icon: '👑',
-      title: 'Stylage Ongles Naturels',
-      description: 'Mise en forme et traitement des ongles naturels',
-      features: ['Limage professionnelle', 'Cuticules traitées', 'Vernis ou finition colorée'],
-      price: 'À partir de 25€',
-    },
-    {
-      id: 6,
-      icon: '💍',
-      title: 'Nail Art Complexe',
-      description: 'Créations artisanales avec détails et techniques avancées',
-      features: ['3D et effets', 'Peinture acrylique', 'Décoration luxe'],
-      price: 'À partir de 60€',
-    },
-    {
-      id: 7,
-      icon: '🌸',
-      title: 'Manucure Complète',
-      description: 'Soin complet des mains et des ongles',
-      features: ['Gommage des mains', 'Hydratation intensive', 'Pose gel ou semi-permanent'],
-      price: 'À partir de 55€',
-    },
-    */
   ];
+
+  const displayServices = services.length > 0 ? services : fallbackServices;
 
   return (
     <>
@@ -109,46 +96,61 @@ export default function Services() {
       <section className="py-4 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="rounded-xl border border-rose-100 overflow-hidden hover-lift bg-gradient-to-br from-white to-rose-50"
-              >
-                {/* Card Header */}
-                <div className="p-8 border-b border-rose-100">
-                  <div className="text-5xl mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
-                  <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500">
-                    {service.price}
+            {displayServices.map((service) => {
+              const priceText = service.priceLabel
+                ? `${service.priceLabel} ${service.price}€`
+                : `${service.price}€`;
+
+              return (
+                <div
+                  key={service.id}
+                  className="rounded-xl border border-rose-100 overflow-hidden hover-lift bg-gradient-to-br from-white to-rose-50"
+                >
+                  {/* Card Header */}
+                  <div className="p-8 border-b border-rose-100">
+                    <div className="text-5xl mb-4">{service.icon || '💅'}</div>
+                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{service.title}</h3>
+                    <p className="text-gray-600 mb-4">{service.description}</p>
+                    <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-500">
+                      {service.isPromo && service.promoPrice ? (
+                        <>
+                          <span className="line-through text-gray-400 mr-2">{priceText}</span>
+                          {service.promoLabel ? `${service.promoLabel} ${service.promoPrice}€` : `${service.promoPrice}€`}
+                        </>
+                      ) : (
+                        priceText
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Card Body */}
+                  {service.features && service.features.length > 0 && (
+                    <div className="p-8">
+                      <h4 className="font-bold text-gray-900 mb-3">Inclus :</h4>
+                      <ul className="space-y-2">
+                        {service.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center text-gray-600">
+                            <span className="text-rose-400 mr-2">✓</span>
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Card Footer */}
+                  <div className="p-8 bg-gradient-to-r from-rose-50 to-pink-50 border-t border-rose-100">
+                    <ReserveButton
+                      type="button"
+                      onClick={() => setIsBookingOpen(true)}
+                      className="block w-full gradient-pink text-white text-center py-2 rounded-lg font-bold hover:shadow-lg transition"
+                    >
+                      Réserver cette prestation
+                    </ReserveButton>
                   </div>
                 </div>
-
-                {/* Card Body */}
-                <div className="p-8">
-                  <h4 className="font-bold text-gray-900 mb-4">Inclus :</h4>
-                  <ul className="space-y-3">
-                    {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-gray-600">
-                        <span className="text-rose-500 font-bold mt-1">✓</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Card Footer */}
-                <div className="p-8 bg-gradient-to-r from-rose-50 to-pink-50 border-t border-rose-100">
-                  <ReserveButton
-                    type="button"
-                    onClick={() => setIsBookingOpen(true)}
-                    className="block w-full gradient-pink text-white text-center py-2 rounded-lg font-bold hover:shadow-lg transition"
-                  >
-                    Réserver cette prestation
-                  </ReserveButton>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

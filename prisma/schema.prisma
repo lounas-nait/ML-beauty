@@ -32,6 +32,45 @@ model Prestation {
   imageUrl    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime
+  priceLabel  String?
+  icon        String?
+  bookingUrl  String?
+  isPromo     Boolean  @default(false)
+  promoPrice  Float?
+  promoLabel  String?
+  order       Int      @default(0)
+  features    String[] @default([])
+}
+
+model Review {
+  id            String         @id @default(cuid())
+  name          String
+  rating        Int
+  comment       String?
+  platform      ReviewPlatform @default(DIRECT)
+  status        ReviewStatus   @default(PENDING)
+  source        ReviewSource   @default(CLIENT)
+  image         String?
+  createdAt     DateTime       @default(now())
+  screenshotUrl String?
+}
+
+model Realisation {
+  id        String             @id @default(cuid())
+  title     String
+  category  String
+  createdAt DateTime           @default(now())
+  media     RealisationMedia[]
+}
+
+model RealisationMedia {
+  id            String      @id @default(cuid())
+  realisationId String
+  url           String
+  type          MediaType   @default(IMAGE)
+  order         Int         @default(0)
+  createdAt     DateTime    @default(now())
+  realisation   Realisation @relation(fields: [realisationId], references: [id], onDelete: Cascade)
 }
 
 enum ReviewPlatform {
@@ -52,38 +91,7 @@ enum ReviewSource {
   ADMIN
 }
 
-model Review {
-  id            String         @id @default(cuid())
-  name          String
-  rating        Int
-  comment       String?
-  screenshotUrl String?
-  platform      ReviewPlatform @default(DIRECT)
-  status        ReviewStatus   @default(PENDING)
-  source        ReviewSource   @default(CLIENT)
-  image         String?
-  createdAt     DateTime       @default(now())
-}
-
 enum MediaType {
   IMAGE
   VIDEO
-}
-
-model Realisation {
-  id        String             @id @default(cuid())
-  title     String
-  category  String
-  media     RealisationMedia[]
-  createdAt DateTime           @default(now())
-}
-
-model RealisationMedia {
-  id            String      @id @default(cuid())
-  realisationId String
-  realisation   Realisation @relation(fields: [realisationId], references: [id], onDelete: Cascade)
-  url           String
-  type          MediaType   @default(IMAGE)
-  order         Int         @default(0)
-  createdAt     DateTime    @default(now())
 }

@@ -1,12 +1,36 @@
 // Service Type
 export interface Service {
   id: number;
-  icon: string;
+  icon?: string;
   title: string;
-  slug: string;
+  slug?: string;
   description: string;
-  features: string[];
-  price: string;
+  features?: string[];
+  price: number;
+  priceLabel?: string;
+  bookingUrl?: string;
+  imageUrl?: string;
+  isPromo?: boolean;
+  promoPrice?: number;
+  promoLabel?: string;
+}
+
+export interface Prestation {
+  id: number;
+  title: string;
+  description?: string | null;
+  price: number;
+  priceLabel?: string | null;
+  icon?: string | null;
+  bookingUrl?: string | null;
+  imageUrl?: string | null;
+  isPromo?: boolean;
+  promoPrice?: number | null;
+  promoLabel?: string | null;
+  order?: number;
+  features?: string[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 // Testimonial Type
