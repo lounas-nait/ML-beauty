@@ -48,7 +48,7 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
             id: 'semimain',
             title: 'Semi-Permanent mains',
             icon: '💅',
-            price: '20€',
+            price: '25€',
             cal: 'https://cal.com/mlbeauty-t9m0ee/semi-permanent',
         },
         {
@@ -74,15 +74,18 @@ export default function BookingModal({ isOpen, onClose }: BookingModalProps) {
         },
         {
             id: 'combo',
-            title: 'Dépose + Semi-Permanent',
+            title: 'Dépose + Semi-Permanent main',
             icon: '🔥',
-            oldPrice: '35€',
-            price: '30€',
-            promo: true,
-            savings: '5€',
+            price: '40€',
             cal: 'https://cal.com/mlbeauty-t9m0ee/depose-pose',
         },
-        
+        {
+            id: 'combopied',
+            title: 'Dépose + Semi-Permanent pied',
+            icon: '🔥',
+            price: '45€',
+            cal: 'https://cal.com/mlbeauty-t9m0ee/depose-pose-semi-permanent-pieds-45',
+        },
 
     ];
 

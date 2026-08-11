@@ -291,13 +291,13 @@ export default function Home() {
                 icon: <LucideBrush/>,
                 title: 'Semi-Permanent',
                 description: 'Vernis semi-permanent 2-3 semaines',
-                price: '20€',
+                price: '25€',
               },
               {
                 icon: <Sparkles />,
                 title: 'Dépose Semi-Permanent',
                 description: 'Retrait du vernis semi-permanent en douceur',
-                price: 'à partir de 10€',
+                price: '15€',
               },
 
               /*

@@ -53,7 +53,7 @@ export const SERVICES = [
       'Durée : 2-3 semaines',
       'Finition brillante impeccable',
     ],
-    price: '20€',
+    price: '25€',
   },
   {
     id: 3,
@@ -103,7 +103,7 @@ export const SERVICES = [
       'Protection de l’ongle naturel',
       'Finition propre et nette',
     ],
-    price: 'À partir de 10€',
+    price: '15€',
   },
 ];
 

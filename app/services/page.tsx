@@ -15,7 +15,7 @@ export default function Services() {
       title: 'Semi-Permanent main',
       description: 'Vernis semi-permanent haute tenue pour des ongles naturels renforcés',
       features: ['Durée : 2-3 semaines', 'Finition brillante impeccable', 'Résultat naturel et élégant'],
-      price: '20€',
+      price: '25€',
     },
     {
       id: 2,
@@ -35,7 +35,7 @@ export default function Services() {
         'Respect total de l’ongle naturel',
         'Nettoyage et finition soignée'
       ],
-      price: 'À partir de 10€',
+      price: '15€',
     },
     
     /*
